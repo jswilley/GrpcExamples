@@ -1,0 +1,18 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/WorkingWithGRPCExampleOne/.vs
+/WorkingWithGRPCExampleOne/TestWASM2/Client/bin/Debug/net5.0
+/WorkingWithGRPCExampleOne/TestWASM2/Client/obj
+/WorkingWithGRPCExampleOne/TestWASM2/Server/bin/Debug/net5.0
+/WorkingWithGRPCExampleOne/TestWASM2/Server/obj
+/WorkingWithGRPCExampleOne/TestWASM2/Shared/bin/Debug/net5.0
+/WorkingWithGRPCExampleOne/TestWASM2/Shared/obj
+/WorkingWithGrpcExampleTwo/.vs/TestingWASM
+/WorkingWithGrpcExampleTwo/GrpcService1/bin/Debug/net5.0
+/WorkingWithGrpcExampleTwo/GrpcService1/obj
+/WorkingWithGrpcExampleTwo/TestingWASM/Client/obj
+/WorkingWithGrpcExampleTwo/TestingWASM/Server/obj
+/WorkingWithGrpcExampleTwo/TestingWASM/Shared/obj
