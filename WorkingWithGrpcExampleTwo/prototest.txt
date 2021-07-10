@@ -1,0 +1,173 @@
+message JSONmsg {
+  required double id = 0
+  required string formTitle = 1
+  required string formDate = 2
+
+  message QUESTIONS {
+    required double formQuestionId = 0
+    required string question = 1
+    required bool required = 2
+    required string formSection = 3
+    required double sequence = 4
+    required double typeOfResponse = 5
+    required double formQuestionEntryID = 6
+
+    message RESPONSEVALUE {
+    }
+
+    required RESPONSEVALUE responseValue = 7
+
+    message RESPONSEOPTIONS {
+      required string shortDescription = 0
+      required string longDescription = 1
+      required double sequence = 2
+      required bool selected = 3
+      repeated undefined followUpQuestions = 4
+    }
+
+    repeated RESPONSEOPTIONS responseOptions = 8
+
+    message DEFAULTRESPONSE {
+    }
+
+    required DEFAULTRESPONSE defaultResponse = 9
+    required string endDate = 10
+  }
+
+  repeated QUESTIONS questions = 3
+}
+
+
+
+
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+
+message SomeMessage {
+
+    message Responseoptions {
+        string shortDescription = 1;
+        string longDescription = 2;
+        uint32 sequence = 3;
+        bool selected = 4;
+        repeated google.protobuf.Any followUpQuestions = 5;
+    }
+
+    message Questions {
+        uint32 formQuestionId = 1;
+        string question = 2;
+        bool required = 3;
+        string formSection = 4;
+        uint32 sequence = 5;
+        uint32 typeOfResponse = 6;
+        uint32 formQuestionEntryID = 7;
+        string responseValue = 8;
+        repeated Responseoptions responseOptions = 9;
+        string defaultResponse = 10;
+        string endDate = 11;
+    }
+
+    uint32 id = 1;
+    string formTitle = 2;
+    string formDate = 3;
+    repeated Questions questions = 4;
+}
+
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+
+message SomeMessage {
+
+    message Responseoptions {
+        string shortDescription = 1;
+        string longDescription = 2;
+        uint32 sequence = 3;
+        bool selected = 4;
+        repeated google.protobuf.Any followUpQuestions = 5;
+    }
+
+    message Questions {
+        uint32 formQuestionId = 1;
+        string question = 2;
+        bool required = 3;
+        string formSection = 4;
+        uint32 sequence = 5;
+        uint32 typeOfResponse = 6;
+        uint32 formQuestionEntryID = 7;
+        google.protobuf.Any responseValue = 8;
+        repeated Responseoptions responseOptions = 9;
+        google.protobuf.Any defaultResponse = 10;
+        string endDate = 11;
+    }
+
+    uint32 id = 1;
+    string formTitle = 2;
+    string formDate = 3;
+    repeated Questions questions = 4;
+}
+
+
+
+
+
+syntax = "proto3";
+
+option csharp_namespace = "Product.gRPC.Protos";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service ProductProtoService {
+  rpc GetProduct (GetProductRequest) returns (ProductModel);
+  rpc GetAllProducts (GetAllProductsRequest) returns (stream ProductModel);
+  rpc AddProduct (AddProductRequest) returns (ProductModel);
+  rpc UpdateProduct (UpdateProductRequest) returns (ProductModel);
+  rpc DeleteProduct (DeleteProductRequest) returns (DeleteProductResponse);
+  rpc InsertBulkProduct (stream ProductModel) returns (InsertBulkProductResponse);
+  rpc Test (google.protobuf.Empty) returns (google.protobuf.Empty);
+}
+
+message GetProductRequest {
+  int32 productId = 1;
+}
+
+message GetAllProductsRequest{
+}
+
+message AddProductRequest {
+  ProductModel product = 1;
+}
+
+message UpdateProductRequest {
+  ProductModel product = 1;
+}
+
+message DeleteProductRequest {
+  int32 productId = 1;
+}
+
+message DeleteProductResponse {
+  bool success = 1;
+}
+
+message InsertBulkProductResponse {
+  bool success = 1;
+  int32 insertCount = 2;
+}
+
+message ProductModel{
+	int32 productId = 1;
+	string name = 2;
+	string description = 3;	
+	float price = 4;
+	ProductStatus status = 5;
+	google.protobuf.Timestamp createdTime = 6;
+}
+
+enum ProductStatus {
+	INSTOCK = 0;
+	LOW = 1;
+	NONE = 2;
+}

@@ -1,0 +1,43 @@
+﻿<div class="col-sm-12">
+    <span class="col-form-label" style="padding:0px;" name="@Question.FormQuestionId">@Question.Question</span>
+</div>
+
+<div class="col-sm-12" id="Comment_@Question.FormQuestionId.ToString()">
+    <InputDate name="@Question.FormQuestionId" @bind-Value="ResponseValue" class="w-75 form-control" />
+    <ValidationMessage For="@(() => Question.ResponseValue)" />
+</div>
+
+@code
+{
+
+    [Parameter]
+    public GrpcServiceForWASM.Core.DTOs.FormQuestionDTO Question { get; set; }
+
+    [Parameter]
+    public EventCallback<GrpcServiceForWASM.Core.DTOs.FormQuestionDTO> QuestionChanged { get; set; }
+
+    public DateTime? ResponseValue
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(Question.ResponseValue))
+                return null;
+            else
+                return DateTime.Parse(Question.ResponseValue);
+        }
+        set
+        {
+            if (value.HasValue)
+                Question.ResponseValue = value.ToString();
+            else
+                Question.ResponseValue = null;
+
+            QuestionChanged.InvokeAsync(Question);
+        }
+    }
+
+    async Task UpdateResponse(string response)
+    {
+        Question.ResponseValue = response;
+        await QuestionChanged.InvokeAsync(Question);
+    } }

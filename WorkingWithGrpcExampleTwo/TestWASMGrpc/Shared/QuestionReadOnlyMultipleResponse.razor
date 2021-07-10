@@ -1,0 +1,26 @@
+﻿<div class="col-sm-12">
+    <p class="readOnlyQuestion">
+        @Question.Question
+    </p>
+
+    <ul class="readOnlyResponse">
+        @if (Question.ResponseOptions.Any(x => x.Selected))
+        {
+            @foreach (var response in Question.ResponseOptions.Where(x => x.Selected).OrderBy(q => q.Sequence))
+            {
+                <li>@response.LongDescription</li>
+            }
+        }
+        else
+        {
+            @GrpcServiceForWASM.Core.ApplicationConstants.NotSpecified
+        }
+
+    </ul>
+</div>
+ 
+@code
+{
+    [Parameter]
+    public GrpcServiceForWASM.Core.DTOs.FormQuestionDTO Question { get; set; }
+}

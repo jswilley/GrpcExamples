@@ -1,0 +1,17 @@
+﻿integrate in the followin files (sitko):
+1. IGrpcClientProvider
+a. IGrpcServiceAddressResolver
+2. Tests may be useful too.
+
+Grpcfactoryapi
+1. see mappers
+
+
+1. read debugging
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-3.1&tabs=visual-studio
+>grpcui localhost:44366
+gRPC Web UI available at http://127.0.0.1:59967/
+https://www.fullstory.com/blog/grpcui-dont-grpc-without-it/
+https://dev-state.com/posts/grpc_framework_1/
+4. move over mappers
+......

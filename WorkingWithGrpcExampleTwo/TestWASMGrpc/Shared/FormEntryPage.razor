@@ -1,0 +1,72 @@
+﻿@using TestWASMGrpc.Services;
+@using TestWASMGrpc.ViewModels;
+@using GrpcServiceForWASM.Core;
+@using Blazored.FluentValidation;
+@using System.Linq;
+
+@inject IFormClientService FormEntryService
+@inject NavigationManager NavigationManager
+
+
+<EditForm Model="@Form.FormEntry" OnValidSubmit="@MarkComplete">
+    <FluentValidationValidator />
+
+    <div class="panel-content">
+        @foreach (var sect in Form.Sections())
+        {
+            <Panel>
+                <PanelHeader>@sect</PanelHeader>
+                <PanelBody>
+                    <div class="assessmentSection">
+                        @foreach (var question in Form.FormEntry.Questions.Where(c => c.FormSection == sect).OrderBy(x => x.Sequence))
+                        {
+                            var local = question;
+                            <FormEntryQuestion Question="local"></FormEntryQuestion>
+                        }
+                    </div>
+                </PanelBody>
+            </Panel>
+
+        }
+
+        <div class="no-print row">
+            <div class="col-lg-4 align-content-center"><button type="button" class="btn btn-success btn-block" @onclick="SaveProgress">Save</button></div>
+
+        </div>
+
+    </div>
+</EditForm>
+
+
+@code {
+    [CascadingParameter(Name = "IsFormEntryReadOnly")]
+    public bool IsFormEntryReadOnly { get; set; }
+
+    [Parameter]
+    public FormViewModel Form { get; set; }
+
+
+
+    private async Task SaveProgress()
+    {
+
+
+        // Form.FormEntry = await FormEntryService.Post(Form.FormEntry, Form.CustodyName);
+
+
+
+        // toastService..ShowSuccess("FormEntry Saved Successfully.", "Success!");
+        this.StateHasChanged();
+    }
+
+    private async Task MarkComplete()
+    {
+        //Form.FormEntry.FormEntryDate = DateTime.Now;
+
+
+        //Form.FormEntry = await FormEntryService.Post(Form.FormEntry);
+
+        ////  toastService.ShowSuccess("Successfully Marked Complete.", "Success!");
+        //NavigationManager.NavigateTo("holding");
+    }
+}

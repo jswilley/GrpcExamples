@@ -1,0 +1,94 @@
+﻿@page "/formentry"
+
+@using  GrpcServiceForWASM.Core.Data.Entities
+@using TestWASMGrpc.Services
+@using TestWASMGrpc.ViewModels 
+
+@inject IFormClientService FormEntryService
+
+
+@if (DataLoaded)
+{
+    <div>
+        <PageHeader IconClass="fas fa-clipboard-list">
+            <Title><span class="fw-300">@Form.FormEntry.FormTitle</span></Title>
+        </PageHeader>
+
+        <CascadingValue Name="IsFormEntryReadOnly" Value=@IsFormEntryReadOnly>
+            @switch (FormType)
+            {
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                  
+                    break;
+                default:
+                    break;
+            }
+        </CascadingValue>
+    </div>
+
+}
+
+<style>
+    .assessmentQuestion {
+        padding: 0.75em 0;
+    }
+
+        .assessmentQuestion:nth-last-child(even) {
+            background-color: #9FCB3D1C;
+        }
+
+        .assessmentQuestion .assessmentQuestion {
+            margin: 0 0 0.25em;
+        }
+
+    .assessmentResponse label {
+        cursor: pointer;
+    }
+
+    p.readOnlyQuestion {
+        margin: 0 0 0.25em 0;
+    }
+
+    .readOnlyResponse {
+        margin: 0 0 0 1.5em;
+        padding: 0;
+    }
+
+    .validation-message {
+        font-size: .6875rem;
+        margin-top: .325rem;
+        color: red;
+        font-weight: 500;
+    }
+</style>
+
+@code
+{
+
+    [Parameter] public string FormType { get; set; } = "5";
+
+    private FormViewModel Form;
+    private bool DataLoaded { get; set; } = false;
+    private bool IsFormEntryReadOnly { get; set; } = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!DataLoaded)
+        {
+            Form = new FormViewModel();
+
+
+            var assessmentTask = FormEntryService.GetForm(1);
+
+            var assessment = await assessmentTask;
+
+            Form.FormEntry = assessment;
+
+            DataLoaded = true;
+        }
+    }
+}

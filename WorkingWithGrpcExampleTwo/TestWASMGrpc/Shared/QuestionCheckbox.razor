@@ -1,0 +1,59 @@
+﻿<div class="col-sm-12">
+    <span class="col-form-label" style="padding:0px;" name="@Question.FormQuestionId">@Question.Question</span>
+</div>
+
+<div class="col-sm-12">
+    <div class="row">
+        @foreach (var response in Question.ResponseOptions.OrderBy(x => x.Sequence))
+        {
+            var responseElementIdentifier = $"q{Question.FormQuestionId}-{response.ShortDescription}";
+            <div class="col-sm-6 col-md-4">
+                <div class="assessmentResponse custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="@Question.FormQuestionId" id="@responseElementIdentifier" value="@response.ShortDescription" checked="@(_selectedValues.Contains(response.ShortDescription))" @onchange="() => UpdateResponse(response.ShortDescription)" />
+                    <label for="@responseElementIdentifier" class="custom-control-label">@response.LongDescription</label>
+                </div>
+            </div>
+        }
+        <ValidationMessage For="@(() => Question.ResponseValue)" />
+    </div>
+</div>
+
+@code
+{
+    private GrpcServiceForWASM.Core.DTOs.FormQuestionDTO _question;
+
+    // Create a collection of selected values
+    private List<string> _selectedValues;
+
+    [Parameter]
+    public GrpcServiceForWASM.Core.DTOs.FormQuestionDTO Question {
+        get
+        {
+            return _question;
+        }
+        set
+        {
+            _question = value;
+
+            // parse and initialize collection of selected values
+            _selectedValues = _question.ResponseValue == null ? new List<string>() : _question.ResponseValue.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
+        }
+    }
+
+    [Parameter]
+    public EventCallback<GrpcServiceForWASM.Core.DTOs.FormQuestionDTO> QuestionChanged { get; set; }
+
+    async Task UpdateResponse(string response)
+    {
+        // add or remove value from selected values
+        if (_selectedValues.Contains(response))
+            _selectedValues.Remove(response);
+        else
+            _selectedValues.Add(response);
+
+        // flatten selected values for persistence
+        Question.ResponseValue = string.Join(',', _selectedValues);
+
+        await QuestionChanged.InvokeAsync(Question);
+    }
+}

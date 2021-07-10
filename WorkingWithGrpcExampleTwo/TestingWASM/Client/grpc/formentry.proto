@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+option csharp_namespace = "TestingWASM.Services";
+
+package FormEntry;
+
+
+service FormEntry {
+  
+  rpc GetForm (FormEntryRequest) returns (FormEntryResponse);
+}
+
+message FormEntryRequest {
+  uint32 formTypeId = 1;
+}
+
+
+message FormEntryResponse {
+
+
+    message FResponseoptions {
+       string shortDescription = 1;
+       string longDescription = 2;
+       double sequence = 3;
+       bool selected = 4;
+     
+    }
+
+    message FollowUpQuestion {
+        uint32 formQuestionId = 1;
+        string question = 2;
+        bool  required= 3;
+        string formSection = 4;
+        uint32 sequence = 5;
+          enum QuestionResponseType
+        {
+            Checkbox =0;
+            Radio =1;
+            Select=2;
+            Text=3;
+            Number=4;
+            Date=5;
+        }
+        QuestionResponseType typeOfResponse = 6;
+        uint32 formQuestionEntryID = 7;
+        string responseValue = 8;
+
+        repeated FResponseoptions responseOptions = 9;
+        string defaultResponse = 10;
+        string endDate = 11;
+    }
+
+
+    message Responseoptions {
+        string shortDescription = 1;
+        string longDescription = 2;
+        uint32 sequence = 3;
+        bool selected = 4;
+        repeated FollowUpQuestion followUpQuestions = 5;
+    }
+
+    message Questions {
+        uint32 formQuestionId = 1;
+        string question = 2;
+        bool  required= 3;
+        string formSection = 4;
+        uint32 sequence = 5;
+         enum QuestionResponseType
+        {
+            Checkbox =0;
+            Radio =1;
+            Select=2;
+            Text=3;
+            Number=4;
+            Date=5;
+        }
+        QuestionResponseType typeOfResponse = 6;
+        uint32 formQuestionEntryID = 7;
+        string responseValue = 8;
+        repeated Responseoptions responseOptions = 9;
+        string defaultResponse = 10;
+        string endDate = 11;
+    }
+
+    uint32 id = 1;
+    string formTitle = 2;
+    string formDate = 3;
+    repeated Questions questions = 4;
+}

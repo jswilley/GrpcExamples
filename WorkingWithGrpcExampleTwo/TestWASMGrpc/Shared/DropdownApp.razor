@@ -1,0 +1,102 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@inject NavigationManager NavigationManager;
+
+<div class="dropdown-header bg-trans-gradient d-flex justify-content-center align-items-center rounded-top" id="appDropdownMenu">
+    <h4 class="m-0 text-center color-white">
+        Quick Shortcut
+        <!--<small class="mb-0 opacity-80">User Applications & Addons</small>-->
+    </h4>
+</div>
+<div class="custom-scroll h-100">
+
+    <ul class="app-list">
+        <li>
+            <a href="@(NavigationManager.BaseUri)admin" class="app-list-item hover-white">
+                <span class="icon-stack">
+                    <i class="base-19 icon-stack-3x color-danger-400"></i>
+                    <i class="base-7 icon-stack-2x color-danger-300"></i>
+                    <i class="base-7 icon-stack-1x fs-xxl color-danger-200"></i>
+                    <i class="base-7 icon-stack-1x color-danger-500"></i>
+                    <i class="fal fa-user-lock icon-stack-1x text-white"></i>
+                </span>
+                <span class="app-list-name">
+                    Admin
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="@(NavigationManager.BaseUri)reports" class="app-list-item hover-white">
+                <span class="icon-stack">
+                    <i class="base-5 icon-stack-3x color-success-700 opacity-80"></i>
+                    <i class="base-12 icon-stack-2x color-success-700 opacity-30"></i>
+                    <i class="fal fa-file icon-stack-1x text-white"></i>
+                </span>
+                <span class="app-list-name">
+                    Reports
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="@(NavigationManager.BaseUri)help" class="app-list-item hover-white">
+                <span class="icon-stack">
+                    <i class="base-5 icon-stack-3x color-warning-600"></i>
+                    <i class="base-7 icon-stack-2x color-warning-800 opacity-50"></i>
+                    <i class="fal fa-question-circle icon-stack-1x text-white"></i>
+                </span>
+                <span class="app-list-name">
+                    Help
+                </span>
+            </a>
+        </li>
+        <hr />
+        <li>
+            <a href="@SwisUrl" target="swis" class="app-list-item hover-white">
+                <span class="icon-stack">
+                    <i class="base-4 icon-stack-3x color-fusion-400"></i>
+                    <i class="base-5 icon-stack-2x color-fusion-200"></i>
+                    <i class="base-5 icon-stack-1x color-fusion-100"></i>
+                    <i class="fal fa-keyboard icon-stack-1x color-info-50"></i>
+                </span>
+                <span class="app-list-name">
+                    Swis
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="@MugshotUrl" target="mugshots" class="app-list-item hover-white">
+                <span class="icon-stack">
+                    <i class="base-16 icon-stack-3x color-fusion-500"></i>
+                    <i class="base-10 icon-stack-1x color-primary-50 opacity-30"></i>
+                    <i class="base-10 icon-stack-1x fs-xl color-primary-50 opacity-20"></i>
+                    <i class="fal fa-dot-circle icon-stack-1x text-white opacity-85"></i>
+                </span>
+                <span class="app-list-name">
+                    Mugshots
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="@IASUrl" target="ias" class="app-list-item hover-white">
+                <span class="icon-stack">
+                    <i class="base-19 icon-stack-3x color-primary-400"></i>
+                    <i class="base-7 icon-stack-2x color-primary-300"></i>
+                    <i class="base-7 icon-stack-1x fs-xxl color-primary-200"></i>
+                    <i class="base-7 icon-stack-1x color-primary-500"></i>
+                    <i class="fal fa-globe icon-stack-1x text-white opacity-85"></i>
+                </span>
+                <span class="app-list-name">
+                    IAS
+                </span>
+            </a>
+        </li>
+
+    </ul>
+</div>
+
+
+@code {
+    public string MugshotUrl { get { return Configuration["ApplicationUrls:Mugshot"]; } }
+    public string SwisUrl { get { return Configuration["ApplicationUrls:Swis"]; } }
+    public string IASUrl { get { return Configuration["ApplicationUrls:IAS"]; } }
+}

@@ -16,3 +16,10 @@
 /WorkingWithGrpcExampleTwo/TestingWASM/Client/obj
 /WorkingWithGrpcExampleTwo/TestingWASM/Server/obj
 /WorkingWithGrpcExampleTwo/TestingWASM/Shared/obj
+/WorkingWithGrpcExampleTwo/GrpcConsoleClient/bin/Debug/net5.0
+/WorkingWithGrpcExampleTwo/GrpcConsoleClient/obj
+/WorkingWithGrpcExampleTwo/TestingWASM/Client/bin/Debug/net5.0
+/WorkingWithGrpcExampleTwo/TestingWASM/Server/bin
+/WorkingWithGrpcExampleTwo/TestingWASM/Shared/bin
+/WorkingWithGrpcExampleTwo/TestWASMGrpc/bin/Debug/net5.0
+/WorkingWithGrpcExampleTwo/TestWASMGrpc/obj

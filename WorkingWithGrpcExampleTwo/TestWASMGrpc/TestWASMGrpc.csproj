@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.6" PrivateAssets="all" />
+    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="ViewModels\AssessmentQuestionViewModel.cs" />
+    <Compile Remove="ViewModels\AuthenticateModel.cs" />
+    <Compile Remove="ViewModels\ClientAssessmentView.cs" />
+    <Compile Remove="ViewModels\ClientAssessStatus.cs" />
+    <Compile Remove="ViewModels\SignInModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Shared\DropdownApp.razor" />
+    <Content Remove="Shared\FormEntryPage.razor" />
+    <Content Remove="Shared\FormEntryQuestion.razor" />
+    <Content Remove="Shared\QuestionCheckbox.razor" />
+    <Content Remove="Shared\QuestionDate.razor" />
+    <Content Remove="Shared\QuestionNumber.razor" />
+    <Content Remove="Shared\QuestionRadio.razor" />
+    <Content Remove="Shared\QuestionReadOnlyMultipleResponse.razor" />
+    <Content Remove="Shared\QuestionReadOnlySingleResponse.razor" />
+    <Content Remove="Shared\QuestionReadOnlyTextResponse.razor" />
+    <Content Remove="Shared\QuestionSelect.razor" />
+    <Content Remove="Shared\QuestionText.razor" />
+    <Content Remove="Shared\StringTypeAheadSelector.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.FluentValidation" Version="2.0.1" />
+    <PackageReference Include="Blazored.Toast" Version="3.1.2" />
+    <PackageReference Include="Grpc.Net.Client.Web" Version="2.38.0" />
+     <PackageReference Include="protobuf-net.Grpc.ClientFactory" Version="1.0.152" />
+ 
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\corepoc\corepoc.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+</Project>
