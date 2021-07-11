@@ -16,6 +16,7 @@ namespace TestingWASM.Server.Api.Form.Services
     using TestingWASM.Shared.Data.Entities;
     using TestingWASM.Shared.DTOs;
     using static TestingWASM.Services.FormEntryResponse.Types;
+    using Newtonsoft.Json;
 
 
     /// <summary>
@@ -37,15 +38,15 @@ namespace TestingWASM.Server.Api.Form.Services
         /// <summary>
         /// Defines the _context.
         /// </summary>
-        private readonly IpocContext _context;
+        private readonly pocContext _context;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FormEntryService"/> class.
         /// </summary>
-        /// <param name="context">The context<see cref="IpocContext"/>.</param>
+        /// <param name="context">The context<see cref="pocContext"/>.</param>
         /// <param name="mapper">The mapper<see cref="IMapper"/>.</param>
         /// <param name="cache"></param>
-        public FormEntryService(IpocContext context, IMapper mapper, ILogger<FormEntryService> logger)
+        public FormEntryService(pocContext context, IMapper mapper, ILogger<FormEntryService> logger)
         {
             _mapper = mapper;
             this.logger = logger;
@@ -107,8 +108,8 @@ namespace TestingWASM.Server.Api.Form.Services
                     form.Questions.Add(fq);
 
                 }
-
-               
+             
+              
                 return form;
             }
 

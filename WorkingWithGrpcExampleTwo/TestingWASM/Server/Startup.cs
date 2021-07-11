@@ -48,14 +48,14 @@ namespace TestingWASM.Server
             }));
 
             services.AddResponseCaching();
-            services.AddDbContext<pocContext>(options =>
+            services.AddDbContext<pocContext>(options => 
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:pocdb"]);
+                options.UseInMemoryDatabase("pocdb");
                 options.UseLoggerFactory(loggerFactory);
                 options.EnableSensitiveDataLogging();
             });
 
-            services.AddScoped<IpocContext>(provider => provider.GetService<pocContext>());
+           // services.AddScoped<pocContext>(provider => provider.GetService<pocContext>());
             services.AddHttpContextAccessor();
 
             services.AddScoped<FormEntryService>();
@@ -92,7 +92,9 @@ namespace TestingWASM.Server
 
             app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
             app.UseCors();
-            //app.UseAuthorization();
+            var scope = app.ApplicationServices.CreateScope();
+            var context = scope.ServiceProvider.GetService<pocContext>();
+            TestingWASM.Shared.Context.Dataload.AddTestData(context);
 
             app.UseEndpoints(endpoints =>
             {

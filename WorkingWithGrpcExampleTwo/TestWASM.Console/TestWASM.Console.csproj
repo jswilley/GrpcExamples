@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -14,15 +14,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TestingWASM\Shared\TestingWASM.Shared.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Protos\" />
+    <Folder Include="protos\" />
   </ItemGroup>
   <ItemGroup>
     <Protobuf Include="..\TestingWASM\Server\Protos\formentry.proto" GrpcServices="Client">
-      <Link>Protos\formentry.proto</Link>
+      <Link>protos\formentry.proto</Link>
     </Protobuf>
   </ItemGroup>
-
 </Project>

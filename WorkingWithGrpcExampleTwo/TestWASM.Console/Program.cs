@@ -3,12 +3,14 @@ using System;
 using System.Threading.Tasks;
 using static TestingWASM.Services.FormEntry;
 
-namespace GrpcConsoleClient
+namespace TestWASM
 {
-    internal class Program
+    class Program
     {
-        private static async Task Main(string[] args)
+        static async Task Main(string[] args)
         {
+
+
             Console.WriteLine("Calling gRPC service...");
 
             using (var channel = GrpcChannel.ForAddress("https://localhost:44366"))

@@ -51,7 +51,7 @@ namespace TestingWASM.Shared.Context
             modelBuilder.Entity<FollowUpQuestion>(entity =>
             {
                 entity.HasKey(e => e.Id)
-                    .IsClustered(false);
+                    ;
 
                 entity.Property(e => e.DefaultResponse).IsUnicode(false);
 
@@ -61,24 +61,18 @@ namespace TestingWASM.Shared.Context
                     .WithMany(p => p.FollowUpQuestions)
                     .HasForeignKey(d => d.QuestionResponseId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FollowUpQuestion_QuestionResponse");
+                    ;
             });
 
             modelBuilder.Entity<FormEntry>(entity =>
             {
-                entity.Property(e => e.AddTimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.AddUser).HasDefaultValueSql("('convert')");
-
-                entity.Property(e => e.ChangeTimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.ChangeUser).HasDefaultValueSql("('convert')");
+              
 
                 entity.HasOne(d => d.FormType)
                     .WithMany(p => p.FormEntries)
                     .HasForeignKey(d => d.FormTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FormEntry_FormType");
+                    ;
             });
 
             modelBuilder.Entity<FormFollowupQuestionEntry>(entity =>
@@ -89,164 +83,109 @@ namespace TestingWASM.Shared.Context
                     .WithMany(p => p.FormFollowupQuestionEntries)
                     .HasForeignKey(d => d.FollowUpQuestionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FormFollowupQuestionEntry_FollowUpQuestion");
+                    ;
 
                 entity.HasOne(d => d.FormQuestionEntry)
                     .WithMany(p => p.FormFollowupQuestionEntries)
                     .HasForeignKey(d => d.FormQuestionEntryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FormFollowupQuestionEntry_FormQuestionEntry");
+                    ;
             });
 
             modelBuilder.Entity<FormQuestion>(entity =>
             {
                 entity.HasIndex(e => e.QuestionId)
-                    .HasName("IX_FormQuestion");
+                  ;
 
-                entity.Property(e => e.AddTimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.AddUser).HasDefaultValueSql("('convert')");
-
-                entity.Property(e => e.ChangeTimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.ChangeUser).HasDefaultValueSql("('convert')");
-
-                entity.Property(e => e.EndDate).HasDefaultValueSql("(dateadd(year,(50),getdate()))");
-
-                entity.Property(e => e.Required).HasDefaultValueSql("((1))");
+              
 
                 entity.HasOne(d => d.FormType)
                     .WithMany(p => p.FormQuestions)
                     .HasForeignKey(d => d.FormTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FormQuestion_FormType");
+                    ;
 
                 entity.HasOne(d => d.Question)
                     .WithMany(p => p.FormQuestions)
                     .HasForeignKey(d => d.QuestionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FormQuestion_Question");
+                    ;
 
                 entity.HasOne(d => d.QuestionResponse)
                     .WithMany(p => p.FormQuestions)
                     .HasForeignKey(d => d.QuestionResponseId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FormQuestion_QuestionResponse");
+                    ;
             });
 
             modelBuilder.Entity<FormQuestionEntry>(entity =>
             {
-                entity.Property(e => e.AddTimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.AddUser).HasDefaultValueSql("('convert')");
-
-                entity.Property(e => e.ChangeTimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.ChangeUser).HasDefaultValueSql("('convert')");
+               
 
                 entity.HasOne(d => d.Form)
                     .WithMany(p => p.FormQuestionEntries)
                     .HasForeignKey(d => d.FormId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FormQuestionEntry_FormEntry");
+                  ;
 
                 entity.HasOne(d => d.FormQuestion)
                     .WithMany(p => p.FormQuestionEntries)
                     .HasForeignKey(d => d.FormQuestionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FormQuestionEntry_FormQuestion");
+                  ;
             });
 
-            modelBuilder.Entity<FormSection>(entity =>
-            {
-                entity.Property(e => e.AddTimeStamp).HasDefaultValueSql("(getdate())");
+           
 
-                entity.Property(e => e.AddUser).HasDefaultValueSql("('convert')");
-
-                entity.Property(e => e.ChangeTimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.ChangeUser).HasDefaultValueSql("('convert')");
-            });
-
-            modelBuilder.Entity<FormType>(entity =>
-            {
-                entity.Property(e => e.AddTimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.AddUser).HasDefaultValueSql("('convert')");
-
-                entity.Property(e => e.ChangeTimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.ChangeUser).HasDefaultValueSql("('convert')");
-
-                entity.Property(e => e.EndDate).HasDefaultValueSql("(dateadd(year,(50),getdate()))");
-            });
+          
 
             modelBuilder.Entity<Question>(entity =>
             {
                 entity.HasIndex(e => e.Id)
-                    .HasName("IX_Question")
+                   
                     .IsUnique();
 
-                entity.Property(e => e.AddTimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.AddUser).HasDefaultValueSql("('convert')");
-
-                entity.Property(e => e.ChangeTimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.ChangeUser).HasDefaultValueSql("('convert')");
-
-                entity.Property(e => e.EndDate).HasDefaultValueSql("(dateadd(year,(50),getdate()))");
+               
             });
 
-            modelBuilder.Entity<QuestionResponse>(entity =>
-            {
-                entity.Property(e => e.AddTimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.AddUser).HasDefaultValueSql("('convert')");
-
-                entity.Property(e => e.ChangeTimeStamp).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.ChangeUser).HasDefaultValueSql("('convert')");
-            });
+           
 
             modelBuilder.Entity<QuestionResponseOption>(entity =>
             {
                 entity.HasKey(e => e.Id)
-                    .IsClustered(false);
+                    ;
 
                 entity.Property(e => e.LongDescription).IsUnicode(false);
 
                 entity.Property(e => e.ShortDescription).IsUnicode(false);
 
-                entity.Property(e => e.SortOrder).HasDefaultValueSql("((200))");
+          
 
                 entity.HasOne(d => d.QuestionResponse)
                     .WithMany(p => p.QuestionResponseOptions)
                     .HasForeignKey(d => d.QuestionResponseId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_QuestionResponseOption_QuestionResponse");
+                    ;
             });
 
             modelBuilder.Entity<QuestionResponseOptionFollowUpQuestionMap>(entity =>
             {
                 entity.HasKey(e => e.Id)
-                    .IsClustered(false);
+                    ;
 
-                entity.Property(e => e.Required).HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.SortOrder).HasDefaultValueSql("((200))");
+        
 
                 entity.HasOne(d => d.FollowUpQuestion)
                     .WithMany(p => p.QuestionResponseOptionFollowUpQuestionMaps)
                     .HasForeignKey(d => d.FollowUpQuestionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_QuestionResponseOptionFollowUpQuestionMap_FollowUpQuestion");
+                    ;
 
                 entity.HasOne(d => d.FormQuestion)
                     .WithMany(p => p.QuestionResponseOptionFollowUpQuestionMaps)
                     .HasForeignKey(d => d.FormQuestionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_QuestionResponseOptionFollowUpQuestionMap_FormQuestion");
+                    ;
             });
 
             OnModelCreatingPartial(modelBuilder);

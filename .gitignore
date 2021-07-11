@@ -23,3 +23,5 @@
 /WorkingWithGrpcExampleTwo/TestingWASM/Shared/bin
 /WorkingWithGrpcExampleTwo/TestWASMGrpc/bin/Debug/net5.0
 /WorkingWithGrpcExampleTwo/TestWASMGrpc/obj
+/WorkingWithGrpcExampleTwo/TestWASM.Console/bin/Debug/net5.0
+/WorkingWithGrpcExampleTwo/TestWASM.Console/obj
