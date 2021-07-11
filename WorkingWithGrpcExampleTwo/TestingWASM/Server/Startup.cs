@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Logging;
 using Grpc.Reflection;
 using Grpc.AspNetCore;
@@ -20,9 +22,9 @@ namespace TestingWASM.Server
         public IWebHostEnvironment HostingEnvironment { get; private set; }
 
         public static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
-         {
-             builder.AddDebug();
-         }
+        {
+            builder.AddDebug();
+        }
  );
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
@@ -48,19 +50,19 @@ namespace TestingWASM.Server
             }));
 
             services.AddResponseCaching();
-            services.AddDbContext<pocContext>(options => 
+            services.AddDbContext<pocContext>(options =>
             {
                 options.UseInMemoryDatabase("pocdb");
                 options.UseLoggerFactory(loggerFactory);
                 options.EnableSensitiveDataLogging();
             });
 
-           // services.AddScoped<pocContext>(provider => provider.GetService<pocContext>());
+            // services.AddScoped<pocContext>(provider => provider.GetService<pocContext>());
             services.AddHttpContextAccessor();
 
             services.AddScoped<FormEntryService>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-        
+
             services.AddControllersWithViews();
             services.AddRazorPages();
             //services.AddTransient<IFormReadService, FormReadService>();
@@ -73,17 +75,17 @@ namespace TestingWASM.Server
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //     app.UseWebAssemblyDebugging();
+                app.UseWebAssemblyDebugging();
             }
             else
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-               // app.UseHsts();
+                app.UseHsts();
             }
-           
-            app.UseHsts();
-            
+
+
+
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
@@ -108,10 +110,10 @@ namespace TestingWASM.Server
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
                 endpoints.MapFallbackToFile("index.html");
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
-                });
+                //endpoints.MapGet("/", async context =>
+                //{
+                //    await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+                //});
             });
         }
     }

@@ -84,8 +84,10 @@
             var assessmentTask = await service.GetForm(1);
 
             //var assessment = await assessmentTask;
-
-            //Form.FormEntry = assessment;
+            Form.FormEntry.FormDate = string.IsNullOrEmpty(assessmentTask.FormDate) ? null : Convert.ToDateTime(assessmentTask.FormDate);
+            Form.FormEntry.FormTitle = assessmentTask.FormTitle;
+            Form.FormEntry.Id = Convert.ToInt32(assessmentTask.Id);
+            //  Form.FormEntry.Questions = assessmentTask.Questions;
 
             DataLoaded = true;
         }
