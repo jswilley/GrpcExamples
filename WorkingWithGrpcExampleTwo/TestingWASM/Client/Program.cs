@@ -37,44 +37,7 @@ namespace TestingWASM.Client
 
 
             builder.Services.AddScoped<IFormClientService, FormClientService>();
-            //var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            //builder.RootComponents.Add<App>("#app");
-            ////using var channel = GrpcChannel.ForAddress("https://localhost:44366");
-
-            ////var client = new FormEntryClient(channel).GetFormAsync(new FormEntryRequest() { FormTypeId = 1 });
-
-            //builder.Services.AddGrpcClient<FormEntryClient>(o =>
-            //{
-            //    o.Address = new Uri("https://localhost:44366");
-
-
-            //});
-
-            //  builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-            //builder.Services.AddScoped<GrpcChannel>(services =>
-            //{
-            //    // This switch must be set before creating the GrpcChannel/HttpClient.
-
-            //    //var grpcWebHandler = new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler());
-            //    var channel = GrpcChannel.ForAddress(new Uri("https://localhost:44366"), new GrpcChannelOptions { HttpHandler = new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler()) });
-
-            //    return channel;
-            //});
-            ////https://docs.microsoft.com/en-us/aspnet/core/grpc/clientfactory?view=aspnetcore-5.0
-            //builder.Services.AddGrpcClient<FormEntryClient>(o =>
-            //{
-            //    o.Address = new Uri("https://localhost:44366");
-
-
-            //});
-            //.ConfigurePrimaryHttpMessageHandler(() =>
-            // {
-            //     var handler = new HttpClientHandler();
-            //     handler.ClientCertificates.Add(LoadCertificate());
-            //     return handler;
-            // });
-
+            
 
 
 

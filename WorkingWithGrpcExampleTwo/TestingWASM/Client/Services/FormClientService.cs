@@ -33,7 +33,7 @@ namespace TestingWASM.Services
             try
             {
                 var req = new FormEntryRequest();
-                req.FormTypeId = (uint)formTypeId;
+                req.FormTypeId = formTypeId;
 
                 var result = await GRpcClient.GetFormAsync(req);
                 return result;

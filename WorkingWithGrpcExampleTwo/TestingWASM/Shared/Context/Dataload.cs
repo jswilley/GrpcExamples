@@ -5,9 +5,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TestingWASM.Shared.Data.Entities;
+using TestingWASM.Shared.DTOs;
 
 namespace TestingWASM.Shared.Context
 {
@@ -21,13 +23,13 @@ namespace TestingWASM.Shared.Context
             // read JSON directly from a file
 
             var file = new StreamReader(GetImageResourceStream("data.json"));
-            using (JsonTextReader reader = new JsonTextReader(file))
-            {
-                JObject o2 = (JObject)JToken.ReadFrom(reader);
 
-              form =  JsonConvert.DeserializeObject<FormEntry>(o2.ToString());
-                return form;
-            }
+            string json = file.ReadToEnd();
+            var ro = JsonConvert.DeserializeObject<FormEntry>(json);
+           
+
+            return ro;
+            
         }
 
         public static FormType LoadDataType()

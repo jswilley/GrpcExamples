@@ -13,6 +13,7 @@
     <Compile Remove="Data\Mapping\QuestionMap.cs" />
     <Compile Remove="Data\Mapping\QuestionResponseMap.cs" />
     <Compile Remove="Data\Mapping\UserMap.cs" />
+    <Compile Remove="grpc\RequestReponse.cs" />
     <Compile Remove="Interfaces\IFormService.cs" />
   </ItemGroup>
 
@@ -31,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="FluentValidation" Version="10.2.3" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.2.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
@@ -45,6 +47,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Mapping\" />
+    <Folder Include="grpc\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
 </Project>
