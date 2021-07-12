@@ -1,4 +1,6 @@
 syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "TestingWASM.Services";
 
@@ -11,7 +13,7 @@ service FormEntry {
 }
 
 message FormEntryRequest {
-  uint32 formTypeId = 1;
+  int32 formTypeId = 1;
 }
 
 
@@ -27,11 +29,11 @@ message FormEntryResponse {
     }
 
     message FollowUpQuestion {
-        uint32 formQuestionId = 1;
+        int32 formQuestionId = 1;
         string question = 2;
         bool  required= 3;
-        string formSection = 4;
-        uint32 sequence = 5;
+        google.protobuf.StringValue formSection = 4;
+        int32 sequence = 5;
           enum QuestionResponseType
         {
             Checkbox =0;
@@ -42,29 +44,29 @@ message FormEntryResponse {
             Date=5;
         }
         QuestionResponseType typeOfResponse = 6;
-        uint32 formQuestionEntryID = 7;
+        int32 formQuestionEntryID = 7;
         string responseValue = 8;
 
         repeated FResponseoptions responseOptions = 9;
-        string defaultResponse = 10;
-        string endDate = 11;
+        google.protobuf.StringValue defaultResponse = 10;
+        google.protobuf.Timestamp endDate = 11;
     }
 
 
     message Responseoptions {
         string shortDescription = 1;
         string longDescription = 2;
-        uint32 sequence = 3;
+        int32 sequence = 3;
         bool selected = 4;
         repeated FollowUpQuestion followUpQuestions = 5;
     }
 
     message Questions {
-        uint32 formQuestionId = 1;
+        int32 formQuestionId = 1;
         string question = 2;
         bool  required= 3;
-        string formSection = 4;
-        uint32 sequence = 5;
+        google.protobuf.StringValue formSection = 4;
+        int32 sequence = 5;
          enum QuestionResponseType
         {
             Checkbox =0;
@@ -75,15 +77,15 @@ message FormEntryResponse {
             Date=5;
         }
         QuestionResponseType typeOfResponse = 6;
-        uint32 formQuestionEntryID = 7;
+        int32 formQuestionEntryID = 7;
         string responseValue = 8;
         repeated Responseoptions responseOptions = 9;
-        string defaultResponse = 10;
-        string endDate = 11;
+        google.protobuf.StringValue defaultResponse = 10;
+        google.protobuf.Timestamp endDate = 11;
     }
 
-    uint32 id = 1;
+    int32 id = 1;
     string formTitle = 2;
-    string formDate = 3;
+    google.protobuf.Timestamp formDate = 3;
     repeated Questions questions = 4;
 }

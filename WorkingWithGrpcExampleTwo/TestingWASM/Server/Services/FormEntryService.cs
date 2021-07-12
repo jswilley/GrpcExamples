@@ -58,13 +58,14 @@ namespace TestingWASM.Server.Api.Form.Services
             //todo add cache.
             var id = (int)request.FormTypeId;
             var formTitle =  _context.FormTypes.AsNoTracking().FirstOrDefault(x => x.Id == id);
-
+       
             //todo creat auto map
             var form = new FormEntryResponse
             {
-                Id = (uint)id,
+                Id = id,
                 FormTitle = formTitle.Title,
-            };
+                 FormDate =Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc))
+        };
             try
             {
                 var result = await GetQuestionsByFormType(id);
@@ -74,30 +75,33 @@ namespace TestingWASM.Server.Api.Form.Services
                 foreach (var item in result)
                 {
                     fq.DefaultResponse = item.DefaultResponse == null ? string.Empty : item.DefaultResponse;
-                    fq.EndDate = item.EndDate.HasValue ? item.EndDate.Value.ToString() : null;
-                    fq.FormQuestionEntryID = (uint)item.FormQuestionEntryID;
-                    fq.FormQuestionEntryID = (uint)item.FormQuestionId;
+                    if (item.EndDate.HasValue)
+                        fq.EndDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(item.EndDate.Value, DateTimeKind.Utc));
+                    
+                    fq.FormQuestionEntryID = item.FormQuestionEntryID;
+                    fq.FormQuestionEntryID = item.FormQuestionId;
                     fq.FormSection = item.FormSection == null ? string.Empty : item.FormSection;
                     fq.Required = item.Required;
                     fq.ResponseValue = item.ResponseValue == null ? string.Empty : item.ResponseValue;
-                    fq.Sequence = (uint)item.Sequence;
+                    fq.Sequence = item.Sequence;
                     fq.Question = item.Question;
                     item.ResponseOptions.ForEach(a =>
                     {
                         fro.LongDescription = a.LongDescription == null ? string.Empty : a.LongDescription;
                         fro.Selected = a.Selected;
-                        fro.Sequence = (uint)a.Sequence;
+                        fro.Sequence = a.Sequence;
                         fro.ShortDescription = a.ShortDescription == null ? string.Empty : a.ShortDescription;
                         a.FollowUpQuestions.Where(c => c.Question != string.Empty).ToList().ForEach(b =>
                         {
                             folq.DefaultResponse = b.DefaultResponse == null ? string.Empty : b.DefaultResponse;
-                            folq.EndDate = b.EndDate.HasValue ? b.EndDate.Value.ToString() : null;
-                            folq.FormQuestionEntryID = (uint)b.FormQuestionEntryID;
-                            folq.FormQuestionEntryID = (uint)b.FormQuestionId;
+                             if (b.EndDate.HasValue)
+                                folq.EndDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(b.EndDate.Value,DateTimeKind.Utc));
+                            folq.FormQuestionEntryID = b.FormQuestionEntryID;
+                            folq.FormQuestionEntryID = b.FormQuestionId;
                             folq.FormSection = b.FormSection == null ? string.Empty : b.FormSection;
                             folq.Required = b.Required;
                             folq.ResponseValue = b.ResponseValue == null ? string.Empty : b.ResponseValue;
-                            folq.Sequence = (uint)b.Sequence;
+                            folq.Sequence = b.Sequence;
                             folq.Question = b.Question;
                             fro.FollowUpQuestions.Add(folq);
 
@@ -128,7 +132,7 @@ namespace TestingWASM.Server.Api.Form.Services
         //    var formTitle = await _context.FormTypes.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         //    var form = new FormEntryResponse
         //    {
-        //        Id = (uint)id,
+        //        Id = id,
         //        FormTitle = formTitle.Title,
         //    };
         //    try

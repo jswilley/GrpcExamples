@@ -17,16 +17,25 @@
             @switch (FormType)
             {
                 case "1":
+
                 case "2":
                 case "3":
                 case "4":
                 case "5":
-                  
-                    break;
-                default:
-                    break;
-            }
-        </CascadingValue>
+                    <div>
+                        <PageHeader IconClass="fas fa-clipboard-list">
+                            <Title><span class="fw-300">@Form.FormEntry.FormTitle</span></Title>
+                        </PageHeader>
+                        <div class="panel-content">
+                           
+
+                        </div>
+                        </div>
+                        break;
+                        default:
+                        break;
+                        }
+                </CascadingValue>
     </div>
 
 }
@@ -83,8 +92,8 @@
 
             var assessmentTask = await service.GetForm(1);
 
-            //var assessment = await assessmentTask;
-            Form.FormEntry.FormDate = string.IsNullOrEmpty(assessmentTask.FormDate) ? null : Convert.ToDateTime(assessmentTask.FormDate);
+        
+           // Form.FormEntry.FormDate = string.IsNullOrEmpty(assessmentTask.FormDate.ToString()) ? null : assessmentTask.FormDate.ToDateTime();
             Form.FormEntry.FormTitle = assessmentTask.FormTitle;
             Form.FormEntry.Id = Convert.ToInt32(assessmentTask.Id);
             //  Form.FormEntry.Questions = assessmentTask.Questions;
