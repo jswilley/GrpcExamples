@@ -1,0 +1,41 @@
+﻿@using TestingWASM.Shared
+@using TestingWASM.Services
+
+<div class="row assessmentQuestion">
+
+    @switch (Question.QuestionResponse.TypeOfResponse)
+    {
+        case (FormEntryResponse.Types.FormQuestionEntries.Types.QuestionResponse.Types.QuestionResponseType)Enums.QuestionResponseType.Checkbox:
+            <QuestionCheckbox Question="Question"></QuestionCheckbox>
+            break;
+        case (FormEntryResponse.Types.FormQuestionEntries.Types.QuestionResponse.Types.QuestionResponseType)Enums.QuestionResponseType.Radio:
+            <QuestionRadio Question="Question"></QuestionRadio>
+            break;
+        case (FormEntryResponse.Types.FormQuestionEntries.Types.QuestionResponse.Types.QuestionResponseType)Enums.QuestionResponseType.Select:
+            <QuestionSelect  Question="Question"></QuestionSelect>
+            break;
+        case (FormEntryResponse.Types.FormQuestionEntries.Types.QuestionResponse.Types.QuestionResponseType)Enums.QuestionResponseType.Text:
+            <QuestionText Question="Question"></QuestionText>
+            break;
+        case (FormEntryResponse.Types.FormQuestionEntries.Types.QuestionResponse.Types.QuestionResponseType)Enums.QuestionResponseType.Number:
+            <QuestionNumber Question = "Question" ></QuestionNumber>
+            break;
+        case (FormEntryResponse.Types.FormQuestionEntries.Types.QuestionResponse.Types.QuestionResponseType)Enums.QuestionResponseType.Date:
+            <QuestionNumber Question="Question" ></QuestionNumber>
+            break;
+    }
+
+
+</div>
+
+@code
+{
+    [CascadingParameter(Name = "IsFormEntryReadOnly")]
+    public bool IsFormEntryReadOnly { get; set; }
+
+    [Parameter]
+    public TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion Question { get; set; }
+
+    [Parameter]
+    public EventCallback<TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion> QuestionChanged { get; set; }
+}

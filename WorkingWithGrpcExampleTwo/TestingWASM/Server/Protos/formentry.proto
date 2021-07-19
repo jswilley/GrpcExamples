@@ -19,6 +19,53 @@ message FormEntryRequest {
 
 message FormEntryResponse {
 
+message FormQuestionEntries
+{
+int32 Id =1;
+int32 FormQuestionId =2;
+int32 FormId = 3;
+string responseValue = 4;
+FormQuestion formQuestion = 5;
+repeated FollowUpQuestion followUpQuestions= 6;
+
+
+
+
+message FormQuestion
+{
+int32 Id =1;
+int32 QuestionId =2;
+int32 FormTypeId =3;
+        bool  required= 4;
+        google.protobuf.StringValue formSection = 5;
+        int32 sequence = 6;
+         google.protobuf.StringValue defaultResponse = 7;
+        google.protobuf.Timestamp endDate = 8;
+        Question Question = 9; 
+        QuestionResponse QuestionResponse = 10;
+}
+
+  message Question {
+        int32 Id = 1;
+        string Text = 2;
+        google.protobuf.Timestamp endDate = 11;
+    }
+message QuestionResponse {
+ int32 Id = 1;
+          enum QuestionResponseType
+        {
+            Checkbox =0;
+            Radio =1;
+            Select=2;
+            Text=3;
+            Number=4;
+            Date=5;
+        } 
+         QuestionResponseType typeOfResponse = 2;
+        repeated Responseoptions responseOptions = 3;
+        repeated FollowUpQuestion followUpQuestions=4;
+
+}
 
     message FResponseoptions {
        string shortDescription = 1;
@@ -61,31 +108,10 @@ message FormEntryResponse {
         repeated FollowUpQuestion followUpQuestions = 5;
     }
 
-    message Questions {
-        int32 formQuestionId = 1;
-        string question = 2;
-        bool  required= 3;
-        google.protobuf.StringValue formSection = 4;
-        int32 sequence = 5;
-         enum QuestionResponseType
-        {
-            Checkbox =0;
-            Radio =1;
-            Select=2;
-            Text=3;
-            Number=4;
-            Date=5;
-        }
-        QuestionResponseType typeOfResponse = 6;
-        int32 formQuestionEntryID = 7;
-        string responseValue = 8;
-        repeated Responseoptions responseOptions = 9;
-        google.protobuf.StringValue defaultResponse = 10;
-        google.protobuf.Timestamp endDate = 11;
-    }
+  } 
 
     int32 id = 1;
     string formTitle = 2;
     google.protobuf.Timestamp formDate = 3;
-    repeated Questions questions = 4;
+    repeated FormQuestionEntries formQuestionEntries = 4;
 }

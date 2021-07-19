@@ -57,9 +57,17 @@ namespace TestingWASM.Server.Api.Form.Services
         {
             //todo add cache.
             var id = (int)request.FormTypeId;
-            var formTitle =  _context.FormTypes.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            var frm = DataSeed.GenFormEntry();
+            //frm.FormType = DataSeed.GenerateFormType();
+            var frment = DataSeed.GenFormQuestionEntries();
+            foreach (var item in frment)
+            {
+                frm.FormQuestionEntries.Add(item);
+            }
+            
+
+            var formTitle =  frm.FormType;
        
-            //todo creat auto map
             var form = new FormEntryResponse
             {
                 Id = id,
@@ -68,55 +76,10 @@ namespace TestingWASM.Server.Api.Form.Services
         };
             try
             {
+                
+                var mapped = frm.FormQuestionEntries.Select(a => _mapper.Map<TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries>(a));
 
-                //TODO use mapping profile.
-                var result = await GetQuestionsByFormType(id);
-                FormEntryResponse.Types.Responseoptions fro = new Responseoptions();
-                var folq = new TestingWASM.Services.FormEntryResponse.Types.FollowUpQuestion();
-                var fq = new Questions();
-                foreach (var item in result)
-                {
-                   fq = this._mapper.Map<Questions>(item);
-
-                    //fq.DefaultResponse = item.DefaultResponse == null ? string.Empty : item.DefaultResponse;
-                    //if (item.EndDate.HasValue)
-                    //    fq.EndDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(item.EndDate.Value, DateTimeKind.Utc));
-                    
-                    //fq.FormQuestionEntryID = item.FormQuestionEntryID;
-                    //fq.FormQuestionId = item.FormQuestionId;
-                    //fq.FormSection = item.FormSection == null ? string.Empty : item.FormSection;
-                    //fq.Required = item.Required;
-                    //fq.ResponseValue = item.ResponseValue == null ? string.Empty : item.ResponseValue;
-                    //fq.Sequence = item.Sequence;
-                    //fq.Question = item.Question;
-                    item.ResponseOptions.ForEach(a =>
-                    {
-                        fro = _mapper.Map<Responseoptions>(a);
-                        //fro.LongDescription = a.LongDescription == null ? string.Empty : a.LongDescription;
-                        //fro.Selected = a.Selected;
-                        //fro.Sequence = a.Sequence;
-                        //fro.ShortDescription = a.ShortDescription == null ? string.Empty : a.ShortDescription;
-                        //a.FollowUpQuestions.Where(c => c.Question != string.Empty).ToList().ForEach(b =>
-                        //{
-                        //    folq.DefaultResponse = b.DefaultResponse == null ? string.Empty : b.DefaultResponse;
-                        //     if (b.EndDate.HasValue)
-                        //        folq.EndDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(b.EndDate.Value,DateTimeKind.Utc));
-                        //    folq.FormQuestionEntryID = b.FormQuestionEntryID;
-                        //    folq.FormQuestionId = b.FormQuestionId;
-                        //    folq.FormSection = b.FormSection == null ? string.Empty : b.FormSection;
-                        //    folq.Required = b.Required;
-                        //    folq.ResponseValue = b.ResponseValue == null ? string.Empty : b.ResponseValue;
-                        //    folq.Sequence = b.Sequence;
-                        //    folq.Question = b.Question;
-                        //    fro.FollowUpQuestions.Add(folq);
-
-                        //});
-                        fq.ResponseOptions.Add(fro);
-                    });
-                    fq.TypeOfResponse = (Questions.Types.QuestionResponseType)item.TypeOfResponse;
-                    form.Questions.Add(fq);
-
-                }
+                form.FormQuestionEntries.AddRange(mapped.AsEnumerable());
              
               
                 return form;
@@ -216,53 +179,59 @@ namespace TestingWASM.Server.Api.Form.Services
         /// </summary>
         /// <param name="formTypeId">The formTypeId<see cref="int"/>.</param>
         /// <returns>The <see cref="List{FormQuestionDTO}"/>.</returns>
-        public async Task<List<FormQuestionDTO>> GetQuestionsByFormType(int formTypeId)
+        public async Task<FormQuestionEntries> GetQuestionsByFormType(int formTypeId)
         {
-            IQueryable<FormQuestion> qs = _context.FormQuestions.Where(x => x.FormTypeId == formTypeId && (x.EndDate == null || x.EndDate > DateTime.Now));
-            var questionQuery = qs
-                .Select(n => new FormQuestionIntermediaryDTO
-                {
-                    ID = ApplicationConstants.NewEntity,
-                    FormQuestionID = n.Id,
-                    Question = n.Question.Text,
-                    FormSection = n.FormSection,
-                    Required = n.Required.GetValueOrDefault(),
-                    Sequence = n.Sequence,
-                    EndDate = n.EndDate,
-                    TypeOfResponse = n.QuestionResponse.TypeOfResponse,
-                    DefaultResponse = n.DefaultResponse,
-                    QuestionResponseOptions = n.QuestionResponse.QuestionResponseOptions
-                        .Select(x => new ResponseOptionIntermediaryDTO
-                        {
-                            ShortDescription = x.ShortDescription,
-                            LongDescription = x.LongDescription,
-                            Sequence = x.SortOrder//,
-                            //FollowUpQuestionMaps = x.FollowUpQuestionMaps
-                            //    .Where(x => x.FormQuestionId == n.Id)
-                            //    .Select(q => new FormQuestionIntermediaryDTO
-                            //    {
-                            //        ID = ApplicationConstants.NewEntity,
-                            //        FormQuestionID = q.FollowUpQuestionId, //FormQuestionID,
-                            //        //FollowUpQuestionID = q.FollowUpQuestionID,
-                            //        Question = q.FollowUpQuestion.Prompt,
-                            //        Sequence = q.SortOrder,
-                            //        Required = q.Required,
-                            //        TypeOfResponse = q.FollowUpQuestion.QuestionResponse.TypeOfResponse,
-                            //        QuestionResponseOptions = q.FollowUpQuestion.QuestionResponse.QuestionResponseOptions
-                            //            .Select(o => new ResponseOptionIntermediaryDTO
-                            //            {
-                            //                ShortDescription = o.ShortDescription,
-                            //                LongDescription = o.LongDescription,
-                            //                Sequence = o.SortOrder
-                            //            })
-                            //    })
-                        })
-                });
 
-            //var questionQuery = _context.FormQuestions.Where(x => x.FormType == formTypeId).OrderBy(x => x.Sequence).ProjectTo<FormQuestionFormQuestionDTOIntermediary>(_mapper.ConfigurationProvider);
-            var questions = await questionQuery.ToListAsync();
+            var x = _context.FormQuestions.Where(x => x.FormTypeId == formTypeId).ToList();
+            var qs = _context.FormEntries.First(x => x.FormTypeId == formTypeId).FormQuestionEntries;
+            var x1 = qs.ToList();
+            // qs.FormQuestionEntries
+            //var questionQuery = qs.FormQuestionEntries.Select
+            //    (n )
+            //    .Select(n => new FormQuestionIntermediaryDTO
+            //    {
+            //        ID = ApplicationConstants.NewEntity,
+            //        FormQuestionID = n.Id,
+            //        Question = n.Question.Text,
+            //        FormSection = n.FormSection,
+            //        Required = n.Required.GetValueOrDefault(),
+            //        Sequence = n.Sequence,
+            //        EndDate = n.EndDate,
+            //        TypeOfResponse = n.QuestionResponse.TypeOfResponse,
+            //        DefaultResponse = n.DefaultResponse,
+            //        QuestionResponseOptions = n.QuestionResponse.QuestionResponseOptions
+            //            .Select(x => new ResponseOptionIntermediaryDTO
+            //            {
+            //                ShortDescription = x.ShortDescription,
+            //                LongDescription = x.LongDescription,
+            //                Sequence = x.SortOrder//,
+            //                //FollowUpQuestionMaps = x.FollowUpQuestionMaps
+            //                //    .Where(x => x.FormQuestionId == n.Id)
+            //                //    .Select(q => new FormQuestionIntermediaryDTO
+            //                //    {
+            //                //        ID = ApplicationConstants.NewEntity,
+            //                //        FormQuestionID = q.FollowUpQuestionId, //FormQuestionID,
+            //                //        //FollowUpQuestionID = q.FollowUpQuestionID,
+            //                //        Question = q.FollowUpQuestion.Prompt,
+            //                //        Sequence = q.SortOrder,
+            //                //        Required = q.Required,
+            //                //        TypeOfResponse = q.FollowUpQuestion.QuestionResponse.TypeOfResponse,
+            //                //        QuestionResponseOptions = q.FollowUpQuestion.QuestionResponse.QuestionResponseOptions
+            //                //            .Select(o => new ResponseOptionIntermediaryDTO
+            //                //            {
+            //                //                ShortDescription = o.ShortDescription,
+            //                //                LongDescription = o.LongDescription,
+            //                //                Sequence = o.SortOrder
+            //                //            })
+            //                //    })
+            //            })
+            //    });
 
-            return _mapper.Map<List<FormQuestionDTO>>(questions);
+            ////var questionQuery = _context.FormQuestions.Where(x => x.FormType == formTypeId).OrderBy(x => x.Sequence).ProjectTo<FormQuestionFormQuestionDTOIntermediary>(_mapper.ConfigurationProvider);
+            //var questions = await questionQuery.ToListAsync();
+
+            //return _mapper.Map<List<FormQuestionDTO>>(questions);
+            return null;
         }
 
 

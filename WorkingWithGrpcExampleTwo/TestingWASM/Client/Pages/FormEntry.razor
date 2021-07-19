@@ -3,6 +3,9 @@
 @using TestingWASM.Shared.Data.Entities
 @using TestingWASM.Services
 @using TestingWASM.ViewModels 
+@using System.Linq
+@using System.Collections.Generic
+ 
 
 @inject IFormClientService service
 
@@ -23,11 +26,19 @@
                 case "4":
                 case "5":
                     <div>
-                        <PageHeader IconClass="fas fa-clipboard-list">
-                            <Title><span class="fw-300">@Form.FormEntry.FormTitle</span></Title>
-                        </PageHeader>
+                        <div IconClass="fas fa-clipboard-list">
+                            <div><span class="fw-300">@FormTitle</span></div>
+                        </div>
                         <div class="panel-content">
                            
+                                    <div class="assessmentSection">
+                                        @foreach (var question in FormQuestions.OrderBy(x => x.Sequence))
+                                        {
+                                            var local = question;
+                                            <FormEntryQuestion Question="local"></FormEntryQuestion>
+                                        }
+                                    </div>
+                              
 
                         </div>
                         </div>
@@ -77,26 +88,28 @@
 @code
 {
 
-    [Parameter] public string FormType { get; set; } = "5";
+    [Parameter] public string FormType { get; set; } = "1";
 
-    private FormViewModel Form;
+    private List<TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion> FormQuestions;
     private bool DataLoaded { get; set; } = false;
     private bool IsFormEntryReadOnly { get; set; } = false;
+    private string FormTitle { get; set; }
+
+
 
     protected override async Task OnInitializedAsync()
     {
         if (!DataLoaded)
         {
-            Form = new FormViewModel();
-
+           
 
             var assessmentTask = await service.GetForm(1);
 
-        
-           // Form.FormEntry.FormDate = string.IsNullOrEmpty(assessmentTask.FormDate.ToString()) ? null : assessmentTask.FormDate.ToDateTime();
-            Form.FormEntry.FormTitle = assessmentTask.FormTitle;
-            Form.FormEntry.Id = Convert.ToInt32(assessmentTask.Id);
-            //  Form.FormEntry.Questions = assessmentTask.Questions;
+
+            // Form.FormEntry.FormDate = string.IsNullOrEmpty(assessmentTask.FormDate.ToString()) ? null : assessmentTask.FormDate.ToDateTime();
+            FormTitle = assessmentTask.FormTitle;
+           
+            FormQuestions = assessmentTask.FormQuestionEntries.Select(a => a.FormQuestion).ToList();
 
             DataLoaded = true;
         }

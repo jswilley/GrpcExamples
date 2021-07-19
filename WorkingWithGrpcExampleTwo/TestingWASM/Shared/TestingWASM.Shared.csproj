@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Context\Dataload.cs" />
     <Compile Remove="Data\Entities\FormQuestion.secondary.cs" />
     <Compile Remove="Data\Entities\QuestionResponse.secondary.cs" />
     <Compile Remove="Data\Mapping\FormQuestionMap.cs" />
@@ -20,15 +21,6 @@
   <ItemGroup>
     <None Remove="Context\data.json" />
     <None Remove="Context\data2.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Context\data.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Context\data2.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

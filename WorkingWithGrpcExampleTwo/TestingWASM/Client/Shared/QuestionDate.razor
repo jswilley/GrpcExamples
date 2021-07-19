@@ -1,0 +1,42 @@
+﻿<div class="col-sm-12">
+    <span class="col-form-label" style="padding:0px;" name="@Question.QuestionId">@Question.Question.Text</span>
+</div>
+
+<div class="col-sm-12" id="Comment_@Question.QuestionId.ToString()">
+    <input type="date" name="@Question.QuestionId" @bind="ResponseValue" class="w-75 form-control" />
+</div>
+
+@code
+{
+
+    [Parameter]
+    public TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion Question { get; set; }
+
+    [Parameter]
+    public EventCallback<TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion> QuestionChanged { get; set; }
+
+    public DateTime? ResponseValue
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(Question.FormSection))
+                return null;
+            else
+                return DateTime.Parse(Question.FormSection);
+        }
+        set
+        {
+            if (value.HasValue)
+                Question.FormSection = value.ToString();
+            else
+                Question.FormSection = null;
+
+            QuestionChanged.InvokeAsync(Question);
+        }
+    }
+
+    async Task UpdateResponse(string response)
+    {
+        Question.FormSection = response;
+        await QuestionChanged.InvokeAsync(Question);
+    } }

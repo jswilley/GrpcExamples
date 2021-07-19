@@ -1,0 +1,42 @@
+﻿<div class="col-sm-12">
+    <span class="col-form-label" style="padding:0px;" name="@Question.QuestionId">@Question.Question.Text</span>
+</div>
+
+<div class="col-sm-12" id="Comment_@Question.QuestionId.ToString()">
+    <input type="number" name="@Question.QuestionId" @bind="ResponseValue" class="w-100 form-control" />
+    
+</div>
+
+@code
+{ 
+    
+    public int ResponseValue
+    {
+        get
+        {
+            if (!string.IsNullOrEmpty(Question.FormSection))
+                return int.Parse("1");
+            else
+                return 1;
+        }
+        set
+        {
+           
+                Question.FormSection = string.Empty;
+            QuestionChanged.InvokeAsync(Question);
+        }
+    }
+
+    [Parameter]
+    public TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion Question { get; set; }
+
+    [Parameter]
+    public EventCallback<TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion> QuestionChanged { get; set; }
+
+    async Task UpdateResponse(string response)
+    {
+        Question.FormSection = response;
+        await QuestionChanged.InvokeAsync(Question);
+    } 
+    
+}

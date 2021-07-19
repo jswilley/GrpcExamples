@@ -62,13 +62,24 @@ namespace TestingWASM.Shared.Context
         public static void AddTestData(pocContext context)
         {
 
-            var type = LoadDataType();
-            context.FormTypes.Add(type);
+            //var type = LoadDataType();
+            //context.FormTypes.Add(type);
 
-            var form = LoadData();
-            context.FormEntries.Add(form);
+            //var form = LoadData();
+            //context.FormEntries.Add(form);
+            //var frm = context.FormEntries.Find(1);
+            //foreach (var item in form.FormQuestionEntries)
+            //{
+            //    frm.FormQuestionEntries.Add(item);
+            //    frm.FormQuestionEntries.First(a => a.Id == item.Id).FormQuestion = item.FormQuestion;
+            //    frm.FormQuestionEntries.First(a => a.Id == item.Id).FormQuestion.Question = item.FormQuestion.Question;
+            //    frm.FormQuestionEntries.First(a => a.Id == item.Id).FormFollowupQuestionEntries = item.FormFollowupQuestionEntries;
 
-            context.SaveChanges();
+            //}
+            
+
+            //context.SaveChanges();
+
         }
     }
 }

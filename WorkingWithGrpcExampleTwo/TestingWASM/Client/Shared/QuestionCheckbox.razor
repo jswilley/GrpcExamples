@@ -1,0 +1,62 @@
+﻿@using TestingWASM.Services
+
+<div class="col-sm-12">
+    <span class="col-form-label" style="padding:0px;" name="@Question.QuestionId">@Question.Question.Text</span>
+</div>
+
+<div class="col-sm-12">
+    <div class="row">
+        @foreach (var response in Question.QuestionResponse.ResponseOptions.OrderBy(x => x.Sequence))
+        {
+            var responseElementIdentifier = $"q{Question.QuestionId}-{response.ShortDescription}";
+            <div class="col-sm-6 col-md-4">
+                <div class="assessmentResponse custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="@Question.QuestionId" id="@responseElementIdentifier" value="@response.ShortDescription" checked="@(_selectedValues.Contains(response.ShortDescription))" @onchange="() => UpdateResponse(response.ShortDescription)" />
+                    <label for="@responseElementIdentifier" class="custom-control-label">@response.LongDescription</label>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@code
+{
+    private TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion _question;
+
+    // Create a collection of selected values
+    private List<string> _selectedValues;
+
+    [Parameter]
+    public TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion Question
+    {
+        get
+        {
+            return _question;
+        }
+        set
+        {
+            _question = value;
+
+            // parse and initialize collection of selected values
+            // _selectedValues = _Question.FormSection == null ? new List<string>() : _Question.FormSection.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
+        }
+    }
+
+    [Parameter]
+    public EventCallback<TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion> QuestionChanged { get; set; }
+
+    async Task UpdateResponse(string response)
+    {
+        // add or remove value from selected values
+        if (_selectedValues.Contains(response))
+            _selectedValues.Remove(response);
+        else
+            _selectedValues.Add(response);
+
+        // flatten selected values for persistence
+        //   Question.FormSection = string.Join(',', _selectedValues);
+
+        await QuestionChanged.InvokeAsync(Question);
+    }
+}

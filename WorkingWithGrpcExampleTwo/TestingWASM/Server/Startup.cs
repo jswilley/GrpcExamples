@@ -96,7 +96,7 @@ namespace TestingWASM.Server
             app.UseCors();
             var scope = app.ApplicationServices.CreateScope();
             var context = scope.ServiceProvider.GetService<pocContext>();
-            TestingWASM.Shared.Context.Dataload.AddTestData(context);
+          //  TestingWASM.Shared.Context.Dataload.AddTestData(context);
 
             app.UseEndpoints(endpoints =>
             {
