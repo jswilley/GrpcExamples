@@ -1,9 +1,9 @@
 ﻿<div class="col-sm-12">
-    <span class="col-form-label" style="padding:0px;" name="@Question.QuestionId">@Question.Question.Text</span>
+    <span class="col-form-label" style="padding:0px;" name="@Question.FormQuestionId">@Question.Question</span>
 </div>
 
-<div class="col-sm-12" id="Comment_@Question.QuestionId.ToString()">
-    <input type="number" name="@Question.QuestionId" @bind="ResponseValue" class="w-100 form-control" />
+<div class="col-sm-12" id="Comment_@Question.FormQuestionId.ToString()">
+    <input type="number" name="@Question.FormQuestionId" @bind="ResponseValue" class="w-100 form-control" />
     
 </div>
 
@@ -14,28 +14,28 @@
     {
         get
         {
-            if (!string.IsNullOrEmpty(Question.FormSection))
-                return int.Parse("1");
+            if (!string.IsNullOrEmpty(Question.ResponseValue))
+                return int.Parse(Question.ResponseValue);
             else
                 return 1;
         }
         set
         {
            
-                Question.FormSection = string.Empty;
+                Question.ResponseValue = value.ToString();
             QuestionChanged.InvokeAsync(Question);
         }
     }
 
     [Parameter]
-    public TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion Question { get; set; }
+    public TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion Question { get; set; }
 
     [Parameter]
-    public EventCallback<TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion> QuestionChanged { get; set; }
+    public EventCallback<TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion> QuestionChanged { get; set; }
 
     async Task UpdateResponse(string response)
     {
-        Question.FormSection = response;
+        Question.ResponseValue = response;
         await QuestionChanged.InvokeAsync(Question);
     } 
     

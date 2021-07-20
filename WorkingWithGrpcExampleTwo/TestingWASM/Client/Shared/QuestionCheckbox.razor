@@ -1,17 +1,17 @@
 ﻿@using TestingWASM.Services
 
 <div class="col-sm-12">
-    <span class="col-form-label" style="padding:0px;" name="@Question.QuestionId">@Question.Question.Text</span>
+    <span class="col-form-label" style="padding:0px;" name="@Question.FormQuestionId">@Question.Question</span>
 </div>
 
 <div class="col-sm-12">
     <div class="row">
-        @foreach (var response in Question.QuestionResponse.ResponseOptions.OrderBy(x => x.Sequence))
+        @foreach (var response in Question.ResponseOptions.OrderBy(x => x.Sequence))
         {
-            var responseElementIdentifier = $"q{Question.QuestionId}-{response.ShortDescription}";
+            var responseElementIdentifier = $"q{Question.FormQuestionId}-{response.ShortDescription}";
             <div class="col-sm-6 col-md-4">
                 <div class="assessmentResponse custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" name="@Question.QuestionId" id="@responseElementIdentifier" value="@response.ShortDescription" checked="@(_selectedValues.Contains(response.ShortDescription))" @onchange="() => UpdateResponse(response.ShortDescription)" />
+                    <input type="checkbox" class="custom-control-input" name="@Question.FormQuestionId" id="@responseElementIdentifier" value="@response.ShortDescription" checked="@(_selectedValues.Contains(response.ShortDescription))" @onchange="() => UpdateResponse(response.ShortDescription)" />
                     <label for="@responseElementIdentifier" class="custom-control-label">@response.LongDescription</label>
                 </div>
             </div>
@@ -22,29 +22,29 @@
 
 @code
 {
-    private TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion _question;
+    private TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion _Question;
 
     // Create a collection of selected values
     private List<string> _selectedValues;
 
     [Parameter]
-    public TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion Question
+    public TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion Question
     {
         get
         {
-            return _question;
+            return _Question;
         }
         set
         {
-            _question = value;
+            _Question = value;
 
             // parse and initialize collection of selected values
-            // _selectedValues = _Question.FormSection == null ? new List<string>() : _Question.FormSection.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
+             _selectedValues = _Question.FormSection == null ? new List<string>() : _Question.FormSection.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
         }
     }
 
     [Parameter]
-    public EventCallback<TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion> QuestionChanged { get; set; }
+    public EventCallback<TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion> QuestionChanged { get; set; }
 
     async Task UpdateResponse(string response)
     {
@@ -55,7 +55,7 @@
             _selectedValues.Add(response);
 
         // flatten selected values for persistence
-        //   Question.FormSection = string.Join(',', _selectedValues);
+          Question.ResponseValue = string.Join(',', _selectedValues);
 
         await QuestionChanged.InvokeAsync(Question);
     }

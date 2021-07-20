@@ -7,11 +7,14 @@
   <ItemGroup>
     <SupportedPlatform Include="browser" />
     <Compile Remove="Controllers\WeatherForecastController.cs" />
+    <Compile Remove="MappingProfiles\FormMappingProfile.cs" />
+    <Compile Remove="Services\FormEntryService.cs" />
     <Compile Remove="Services\GreeterService.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Protos\formentry.proto" />
+    <None Remove="Protos\formentry.v2.proto" />
     <None Remove="Protos\greet.proto" />
   </ItemGroup>
 
@@ -33,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\formentry.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\formentry.v2.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>

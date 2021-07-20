@@ -10,8 +10,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using TestingWASM.Services;
-using static TestingWASM.Services.FormEntry;
+using TestingWASM.Services.v2;
+using static TestingWASM.Services.v2.FormEntryService;
 
 namespace TestingWASM.Client
 {
@@ -31,7 +31,7 @@ namespace TestingWASM.Client
                 var httpClient = new HttpClient(new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler()));
                 var baseUri = services.GetRequiredService<NavigationManager>().BaseUri;
                 var channel = GrpcChannel.ForAddress("https://localhost:44366", new GrpcChannelOptions { HttpClient = httpClient });
-                return new FormEntryClient(channel);
+                return new FormEntryServiceClient(channel);
             });
 
 

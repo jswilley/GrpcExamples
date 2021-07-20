@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
-using static TestingWASM.Services.FormEntry;
+using TestingWASM.Services.v2;
+using static TestingWASM.Services.v2.FormEntryService;
 
-namespace TestingWASM.Services
+namespace TestingWASM.Services.v2
 {
     public interface IFormClientService
     {
-        FormEntryClient GRpcClient { get; }
+        FormEntryServiceClient GRpcClient { get; }
 
         Task<FormEntryResponse> GetForm(int formTypeId);
     }
@@ -14,13 +15,13 @@ namespace TestingWASM.Services
     {
 
 
-        public FormClientService(FormEntryClient gRpcClient)
+        public FormClientService(FormEntryServiceClient gRpcClient)
         {
 
             GRpcClient = gRpcClient;
         }
 
-        public FormEntryClient GRpcClient { get; }
+        public FormEntryServiceClient GRpcClient { get; }
 
         //public async Task<IEnumerable<FormType>> GetAllFormTypes()
         //{

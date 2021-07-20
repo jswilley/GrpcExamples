@@ -16,7 +16,7 @@ namespace TestingWASM.Shared.DTOs
         public DateTime? FormDate { get; set; }
 
         [DataMember(Order = 4)]
-        public List<FormQuestion> Questions { get; set; }
+        public List<FormQuestionDTO> Questions { get; set; }
 
         //public FormDTO()
         //{

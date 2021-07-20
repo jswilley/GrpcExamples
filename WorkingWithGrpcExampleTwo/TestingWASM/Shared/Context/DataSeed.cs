@@ -11,8 +11,8 @@ namespace TestingWASM.Shared.Context
             return new FormType()
             {
                 Id = 1,
-                Title = "Hope Team",
-                ShortName = "Hope",
+                Title = "Team A",
+                ShortName = "TeamA",
                 EndDate = System.DateTime.Parse("2049-01-01T00:00:00"),
                 SortOrder = 1,
                 AddTimeStamp = System.DateTime.Parse("2021-02-21T10:07:23"),
@@ -157,7 +157,7 @@ namespace TestingWASM.Shared.Context
                 AddUser = "seed",
                 ChangeTimeStamp = System.DateTime.Parse("2021-02-21T10:07:23"),
                 ChangeUser = "seed",
-                QuestionResponseOptions = resp.Take(2).ToList()
+                QuestionResponseOptions = resp.Where( a => a.Id == 1 || a.Id == 2).ToList()
             });
             result.Add(new QuestionResponse()
             {
@@ -189,7 +189,7 @@ namespace TestingWASM.Shared.Context
                 AddUser = "seed",
                 ChangeTimeStamp = System.DateTime.Parse("2021-02-21T10:07:23"),
                 ChangeUser = "seed",
-                QuestionResponseOptions = GenQuestionResponseOption().Skip(2).Take(3).ToList()
+                QuestionResponseOptions = GenQuestionResponseOption().Where(a => a.Id > 2).ToList()
 
                 
             });
@@ -224,7 +224,7 @@ namespace TestingWASM.Shared.Context
             var result = new List<QuestionResponseOption>();
             result.Add(new QuestionResponseOption()
             {
-                Id = 0,
+                Id = 1,
                 //QuestionResponse = GenListQuestionResponse().First(),
                 EffectiveDate = System.DateTime.Parse("2020-02-21T10:07:23"),
                 ExpirationDate = System.DateTime.Parse("2077-12-30T00:00:00"),
@@ -241,7 +241,7 @@ namespace TestingWASM.Shared.Context
 
             result.Add(new QuestionResponseOption()
             {
-                Id = 0,
+                Id = 2,
                 //QuestionResponse = GenListQuestionResponse().Skip(1).First(),
                 EffectiveDate = System.DateTime.Parse("2020-02-21T10:07:23"),
                 ExpirationDate = System.DateTime.Parse("2077-12-30T00:00:00"),
@@ -255,25 +255,11 @@ namespace TestingWASM.Shared.Context
                 ChangeUser = "seed",
             });
 
-            result.Add(new QuestionResponseOption()
-            {
-                Id = 0,
-                //QuestionResponse = GenListQuestionResponse().First(),
-                EffectiveDate = System.DateTime.Parse("2020-02-21T10:07:23"),
-                ExpirationDate = System.DateTime.Parse("2077-12-30T00:00:00"),
-                ShortDescription = "N",
-                LongDescription = "No",
-                SortOrder = 2,
-                QuestionResponseId = 0,
-                AddTimeStamp = System.DateTime.Parse("2021-02-21T10:07:23"),
-                AddUser = "seed",
-                ChangeTimeStamp = System.DateTime.Parse("2021-02-21T10:07:23"),
-                ChangeUser = "seed",
-            });
+          
 
             result.Add(new QuestionResponseOption()
             {
-                Id = 0,
+                Id = 3,
                 //QuestionResponse = GenListQuestionResponse().First(a => a.TypeOfResponse == "Select"),
                 EffectiveDate = System.DateTime.Parse("2020-02-21T10:07:23"),
                 ExpirationDate = System.DateTime.Parse("2077-12-30T00:00:00"),
@@ -289,7 +275,7 @@ namespace TestingWASM.Shared.Context
 
             result.Add(new QuestionResponseOption()
             {
-                Id = 0,
+                Id = 4,
                 //QuestionResponse = GenListQuestionResponse().First(a => a.TypeOfResponse == "Select"),
                 EffectiveDate = System.DateTime.Parse("2020-02-21T10:07:23"),
                 ExpirationDate = System.DateTime.Parse("2077-12-30T00:00:00"),
@@ -305,7 +291,7 @@ namespace TestingWASM.Shared.Context
 
             result.Add(new QuestionResponseOption()
             {
-                Id = 0,
+                Id = 5,
                 //QuestionResponse = GenListQuestionResponse().First(a => a.TypeOfResponse == "Select"),
                 EffectiveDate = System.DateTime.Parse("2020-02-21T10:07:23"),
                 ExpirationDate = System.DateTime.Parse("2077-12-30T00:00:00"),

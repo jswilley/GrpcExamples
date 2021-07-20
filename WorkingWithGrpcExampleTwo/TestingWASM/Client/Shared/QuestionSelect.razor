@@ -1,13 +1,13 @@
 ﻿<div class="col-sm-12 col-md-9">
-    <span class="col-form-label" style="padding:0px;" name="@Question.QuestionId">@Question.Question.Text</span>
+    <span class="col-form-label" style="padding:0px;" name="@Question.FormQuestionId">@Question.Question</span>
 </div>
 
 <div class="col-sm-6 col-md-3 row">
-    <select class="form-control" Value="@Question.FormSection" >
+    <select class="form-control" Value="@Question.ResponseValue" >
         <option value=""></option>
-        @foreach (var response in Question.QuestionResponse.ResponseOptions.OrderBy(x => x.Sequence))
+        @foreach (var response in Question.ResponseOptions.OrderBy(x => x.Sequence))
         {
-            <option value="@response.ShortDescription" selected="@(Question.FormSection == response.ShortDescription ? "selected" : null)"> @response.LongDescription </option>
+            <option value="@response.ShortDescription" selected="@(Question.ResponseValue == response.ShortDescription ? "selected" : null)"> @response.LongDescription </option>
         }
     </select>
     
@@ -16,14 +16,14 @@
 @code
 {
     [Parameter]
-    public TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion Question { get; set; }
+    public TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion Question { get; set; }
 
     [Parameter]
-    public EventCallback<TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion> QuestionChanged { get; set; }
+    public EventCallback<TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion> QuestionChanged { get; set; }
 
     async Task UpdateResponse(string response)
     {
-        Question.FormSection = response;
+        Question.ResponseValue = response;
         await QuestionChanged.InvokeAsync(Question);
     }
 }

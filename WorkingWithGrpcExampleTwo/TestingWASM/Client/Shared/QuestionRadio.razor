@@ -1,13 +1,13 @@
 ﻿<div class="col-sm-12 col-md-9">
-    <span class="col-form-label" style="padding:0px;" name="@Question.QuestionId">@Question.Question</span>
+    <span class="col-form-label" style="padding:0px;" name="@Question.FormQuestionId">@Question.</span>
 </div>
 
 <div class="col-sm-6 col-md-3 row">
-    @foreach (var response in Question.QuestionResponse.ResponseOptions.OrderBy(x => x.Sequence))
+    @foreach (var response in Question.ResponseOptions.OrderBy(x => x.Sequence))
     {
-        var responseElementIdentifier = $"q{Question.QuestionId}-{response.ShortDescription}";
+        var responseElementIdentifier = $"q{Question.FormQuestionEntryID}-{response.ShortDescription}";
         <div class="col-sm-6 assessmentResponse custom-control custom-radio">
-            <input type="radio" class="custom-control-input" name="@Question.QuestionId" id="@responseElementIdentifier" value="@response.ShortDescription" checked="@(response.ShortDescription == Question.FormSection)" @onchange="() => UpdateResponse(response.ShortDescription)" />
+            <input type="radio" class="custom-control-input" name="@Question.FormQuestionId" id="@responseElementIdentifier" value="@response.ShortDescription" checked="@(response.ShortDescription == Question.ResponseValue)" @onchange="() => UpdateResponse(response.ShortDescription)" />
             <label for="@responseElementIdentifier" class="custom-control-label">@response.LongDescription</label>
         </div>
     }
@@ -17,14 +17,14 @@
 @code
 {
     [Parameter]
-    public TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion Question { get; set; }
+    public TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion Question { get; set; }
 
     [Parameter]
-    public EventCallback<TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion> QuestionChanged { get; set; }
+    public EventCallback<TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion> QuestionChanged { get; set; }
 
     async Task UpdateResponse(string response)
     {
-        Question.FormSection = response;
+        Question.ResponseValue = response;
         await QuestionChanged.InvokeAsync(Question);
     }
 }

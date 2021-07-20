@@ -27,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\Server\Protos\formentry.proto" GrpcServices="Client">
-      <Link>grpc\formentry.proto</Link>
+    <Protobuf Include="..\Server\Protos\formentry.v2.proto" GrpcServices="Client">
+      <Link>grpc\formentry.v2.proto</Link>
     </Protobuf>
   </ItemGroup>
 

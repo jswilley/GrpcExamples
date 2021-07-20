@@ -1,0 +1,62 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "TestingWASM.Services.v2";
+
+package FormEntry.v2;
+
+
+service FormEntryService {
+  
+  rpc GetForm (FormEntryRequest) returns (FormEntryResponse);
+}
+
+message FormEntryRequest {
+  int32 formTypeId = 1;
+}
+
+
+message FormEntryResponse {
+
+    message ResponseOption {
+        string shortDescription = 1;
+        string longDescription = 2;
+        int32 sequence = 3;
+        bool selected = 4;
+    
+    }
+
+    message FormQuestion {
+        int32 FormQuestionId = 1;
+        string Question = 2;
+        bool  Required= 3;
+        google.protobuf.StringValue FormSection = 4;
+        int32 Sequence = 5;
+         enum QuestionResponseType
+        {
+            Checkbox =0;
+            Radio =1;
+            Select=2;
+            Text=3;
+            Number=4;
+            Date=5;
+        }
+        QuestionResponseType TypeOfResponse = 6;
+        int32 FormQuestionEntryID = 7;
+        string ResponseValue = 8;
+        repeated ResponseOption ResponseOptions = 9;
+        google.protobuf.StringValue DefaultResponse = 10;
+        google.protobuf.Timestamp EndDate = 11;
+        string TypeOfResponseText = 12;
+        string AddUser = 13;
+        google.protobuf.Timestamp AddTimeStamp = 14;
+         string ChangeUser = 15;
+        google.protobuf.Timestamp ChangeTimeStamp = 16;
+    }
+
+    int32 Id = 1;
+    string FormTitle = 2;
+    google.protobuf.Timestamp FormDate = 3;
+    repeated FormQuestion Questions = 4;
+}

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using TestingWASM.Services;
+using TestingWASM.Services.v2;
 using TestingWASM.Shared.Data.Entities;
 using TestingWASM.Shared.DTOs;
 
-namespace TestingWASM.Server.Api.Form.Services
+namespace TestingWASM.Server.Api.Form.Servicesv2
 {
-    public interface IFormEntryService
+    public interface IFormEntryServicev2
     {
         Task<IEnumerable<FormType>> GetAllFormTypes();
         Task<FormEntryResponse> GetForm(FormEntryRequest request);

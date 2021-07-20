@@ -1,7 +1,7 @@
 ﻿@page "/formentry"
 
 @using TestingWASM.Shared.Data.Entities
-@using TestingWASM.Services
+@using TestingWASM.Services.v2
 @using TestingWASM.ViewModels 
 @using System.Linq
 @using System.Collections.Generic
@@ -90,7 +90,7 @@
 
     [Parameter] public string FormType { get; set; } = "1";
 
-    private List<TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion> FormQuestions;
+    private List<TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion> FormQuestions;
     private bool DataLoaded { get; set; } = false;
     private bool IsFormEntryReadOnly { get; set; } = false;
     private string FormTitle { get; set; }
@@ -109,7 +109,7 @@
             // Form.FormEntry.FormDate = string.IsNullOrEmpty(assessmentTask.FormDate.ToString()) ? null : assessmentTask.FormDate.ToDateTime();
             FormTitle = assessmentTask.FormTitle;
            
-            FormQuestions = assessmentTask.FormQuestionEntries.Select(a => a.FormQuestion).ToList();
+            FormQuestions = assessmentTask.Questions.ToList();
 
             DataLoaded = true;
         }

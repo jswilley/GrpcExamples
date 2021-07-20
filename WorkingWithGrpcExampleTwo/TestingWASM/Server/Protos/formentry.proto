@@ -4,7 +4,7 @@ import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "TestingWASM.Services";
 
-package FormEntry;
+package FormEntry.v1;
 
 
 service FormEntry {

@@ -3,7 +3,6 @@ namespace TestingWASM.Server.Api.Form.Services
     using AutoMapper;
     using Grpc.Core;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Logging;
     using System;
     using System.Collections.Generic;
@@ -11,12 +10,9 @@ namespace TestingWASM.Server.Api.Form.Services
     using System.Linq;
     using System.Threading.Tasks;
     using TestingWASM.Services;
-    using TestingWASM.Shared;
     using TestingWASM.Shared.Context;
     using TestingWASM.Shared.Data.Entities;
-    using TestingWASM.Shared.DTOs;
     using static TestingWASM.Services.FormEntryResponse.Types;
-    using Newtonsoft.Json;
 
 
     /// <summary>

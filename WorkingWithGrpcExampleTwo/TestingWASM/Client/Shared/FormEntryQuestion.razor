@@ -1,27 +1,27 @@
 ﻿@using TestingWASM.Shared
-@using TestingWASM.Services
+@using TestingWASM.Services.v2
 
 <div class="row assessmentQuestion">
 
-    @switch (Question.QuestionResponse.TypeOfResponse)
+    @switch (Question.TypeOfResponse)
     {
-        case (FormEntryResponse.Types.FormQuestionEntries.Types.QuestionResponse.Types.QuestionResponseType)Enums.QuestionResponseType.Checkbox:
+        case (TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType)Enums.QuestionResponseType.Checkbox:
             <QuestionCheckbox Question="Question"></QuestionCheckbox>
             break;
-        case (FormEntryResponse.Types.FormQuestionEntries.Types.QuestionResponse.Types.QuestionResponseType)Enums.QuestionResponseType.Radio:
+        case (TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType)Enums.QuestionResponseType.Radio:
             <QuestionRadio Question="Question"></QuestionRadio>
             break;
-        case (FormEntryResponse.Types.FormQuestionEntries.Types.QuestionResponse.Types.QuestionResponseType)Enums.QuestionResponseType.Select:
+        case (TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType)Enums.QuestionResponseType.Select:
             <QuestionSelect  Question="Question"></QuestionSelect>
             break;
-        case (FormEntryResponse.Types.FormQuestionEntries.Types.QuestionResponse.Types.QuestionResponseType)Enums.QuestionResponseType.Text:
+        case (TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType)Enums.QuestionResponseType.Text:
             <QuestionText Question="Question"></QuestionText>
             break;
-        case (FormEntryResponse.Types.FormQuestionEntries.Types.QuestionResponse.Types.QuestionResponseType)Enums.QuestionResponseType.Number:
+        case (TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType)Enums.QuestionResponseType.Number:
             <QuestionNumber Question = "Question" ></QuestionNumber>
             break;
-        case (FormEntryResponse.Types.FormQuestionEntries.Types.QuestionResponse.Types.QuestionResponseType)Enums.QuestionResponseType.Date:
-            <QuestionNumber Question="Question" ></QuestionNumber>
+        case (TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType)Enums.QuestionResponseType.Date:
+            <QuestionDate Question="Question" ></QuestionDate>
             break;
     }
 
@@ -34,8 +34,8 @@
     public bool IsFormEntryReadOnly { get; set; }
 
     [Parameter]
-    public TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion Question { get; set; }
+    public TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion Question { get; set; }
 
     [Parameter]
-    public EventCallback<TestingWASM.Services.FormEntryResponse.Types.FormQuestionEntries.Types.FormQuestion> QuestionChanged { get; set; }
+    public EventCallback<TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion> QuestionChanged { get; set; }
 }
