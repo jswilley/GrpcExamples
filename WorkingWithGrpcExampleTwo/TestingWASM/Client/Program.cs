@@ -6,10 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using TestingWASM.Services.v2;
-using static TestingWASM.Services.v2.FormEntryService;
+using Example2.Services.v2;
+using static Example2.Services.v2.FormEntryService;
 
-namespace TestingWASM.Client
+namespace Example2.Client
 {
     public class Program
     {

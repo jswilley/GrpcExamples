@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TestingWASM.Api.Common.Settings
+namespace Example2.Api.Common.Settings
 {
     public class AppSettings
     {

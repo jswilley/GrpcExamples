@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TestingWASM.Shared.Entity.Context
+namespace Example2.Shared.Entity.Context
 {
     public partial class ContextExtensions : DbContext
     {

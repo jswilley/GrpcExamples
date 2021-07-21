@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
-namespace TestingWASM.Shared.Data.Entities
+namespace Example2.Shared.Data.Entities
 {
     [Table("Question")]
     [Index(nameof(Id), Name = "IX_Question", IsUnique = true)]

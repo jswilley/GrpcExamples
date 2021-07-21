@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestingWASM.Shared
+namespace Example2.Shared
 {
     public class WeatherForecast
     {

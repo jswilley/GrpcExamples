@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TestingWASM.Shared.Data.Entities;
+using Example2.Shared.Data.Entities;
 
-namespace TestingWASM.Shared.Context
+namespace Example2.Shared.Context
 {
     public class DataSeed
     {

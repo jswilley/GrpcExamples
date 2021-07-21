@@ -1,4 +1,4 @@
-﻿namespace TestingWASM.ViewModels
+﻿namespace Example2.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
 

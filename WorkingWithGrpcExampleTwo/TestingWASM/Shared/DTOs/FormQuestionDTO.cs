@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace TestingWASM.Shared.DTOs
+namespace Example2.Shared.DTOs
 {
     [DataContract]
     public class FormQuestionDTO

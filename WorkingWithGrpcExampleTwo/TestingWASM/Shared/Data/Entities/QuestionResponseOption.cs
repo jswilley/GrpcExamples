@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
-namespace TestingWASM.Shared.Data.Entities
+namespace Example2.Shared.Data.Entities
 {
     [Table("QuestionResponseOption")]
     public partial class QuestionResponseOption

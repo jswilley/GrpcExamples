@@ -15,10 +15,10 @@
 @code
 {
     [Parameter]
-    public TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion Question { get; set; }
+    public Example2.Services.v2.FormEntryResponse.Types.FormQuestion Question { get; set; }
 
     [Parameter]
-    public EventCallback<TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion> QuestionChanged { get; set; }
+    public EventCallback<Example2.Services.v2.FormEntryResponse.Types.FormQuestion> QuestionChanged { get; set; }
 
     async Task UpdateResponse(string response)
     {

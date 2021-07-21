@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TestingWASM.Shared.Entity
+namespace Example2.Shared.Entity
 {
     public class BaseEntity
     {

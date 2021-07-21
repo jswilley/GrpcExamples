@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TestingWASM.Shared.Data.Entities
+namespace Example2.Shared.Data.Entities
 {
     [Table("FormEntry")]
     public partial class FormEntry

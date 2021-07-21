@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using static TestingWASM.Services.v2.FormEntryService;
+using static Example2.Services.v2.FormEntryService;
 
-namespace TestingWASM.Services.v2
+namespace Example2.Services.v2
 {
     public interface IFormClientService
     {

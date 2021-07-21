@@ -9,9 +9,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using TestingWASM.Services;
+using Example2.Services;
 
-namespace TestingWASM.Client
+namespace Example2.Client
 {
     public class Program
     {

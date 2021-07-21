@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\TestingWASM.Shared.csproj" />
+    <ProjectReference Include="..\Shared\Example2.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

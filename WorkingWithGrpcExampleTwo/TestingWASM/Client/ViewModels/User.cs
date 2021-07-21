@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
-namespace TestingWASM.Models
+namespace Example2.Models
 {
     public class User
     {

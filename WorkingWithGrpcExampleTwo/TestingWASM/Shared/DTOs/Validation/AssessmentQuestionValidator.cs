@@ -2,7 +2,7 @@
 using System.Data;
 using System.Linq;
 
-namespace TestingWASM.Shared.DTOs.Validation
+namespace Example2.Shared.DTOs.Validation
 {
     public class FormQuestionValidator : AbstractValidator<FormQuestionDTO>
     {
