@@ -1,8 +1,8 @@
 ﻿@page "/formentry"
 
-@using TestingWASM.Shared.Data.Entities
-@using TestingWASM.Services.v2
-@using TestingWASM.ViewModels
+@using Example2.Shared.Data.Entities
+@using Example2.Services.v2
+@using Example2.ViewModels
 @using System.Linq
 @using System.Collections.Generic
 
@@ -87,7 +87,7 @@
 
     [Parameter] public string FormType { get; set; } = "1";
 
-    private List<TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion> FormQuestions;
+    private List<Example2.Services.v2.FormEntryResponse.Types.FormQuestion> FormQuestions;
     private bool DataLoaded { get; set; } = false;
     private bool IsFormEntryReadOnly { get; set; } = false;
     private string FormTitle { get; set; }

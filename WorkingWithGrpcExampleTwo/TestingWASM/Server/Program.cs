@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace TestingWASM.Server
+namespace Example2.Server
 {
     public class Program
     {

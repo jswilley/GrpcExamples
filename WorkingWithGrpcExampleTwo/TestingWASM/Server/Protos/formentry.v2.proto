@@ -2,7 +2,7 @@ syntax = "proto3";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 
-option csharp_namespace = "TestingWASM.Services.v2";
+option csharp_namespace = "Example2.Services.v2";
 
 package FormEntry.v2;
 

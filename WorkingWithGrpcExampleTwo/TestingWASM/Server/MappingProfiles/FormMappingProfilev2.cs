@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Google.Protobuf.WellKnownTypes;
 using System;
-using TestingWASM.Services.v2;
-using TestingWASM.Shared.Data.Entities;
+using Example2.Services.v2;
+using Example2.Shared.Data.Entities;
 
-namespace TestingWASM.Server.Api.Form.MappingProfiles
+namespace Example2.Server.Api.Form.MappingProfiles
 {
     public class FormMappingProfilev2 : Profile
     {
@@ -13,7 +13,7 @@ namespace TestingWASM.Server.Api.Form.MappingProfiles
             CreateMap<DateTime, Timestamp>().ConvertUsing(new TimestampTypeConverter());
             CreateMap<Timestamp, DateTime>().ConvertUsing(new DateTimeTypeConverter());
 
-            CreateMap<FormQuestion, TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion>()
+            CreateMap<FormQuestion, Example2.Services.v2.FormEntryResponse.Types.FormQuestion>()
                   .ForMember(dest => dest.AddTimeStamp, options => options.MapFrom(src => src.AddTimeStamp))
               .ForMember(dest => dest.AddUser, options => options.MapFrom(src => src.AddUser))
                 .ForMember(dest => dest.ChangeTimeStamp, options => options.MapFrom(src => src.ChangeTimeStamp))
@@ -35,7 +35,7 @@ namespace TestingWASM.Server.Api.Form.MappingProfiles
             .ForMember(dest => dest.FormQuestionEntryID, options => options.MapFrom(src => src.Id))
             .ForMember(dest => dest.ResponseOptions, options => options.Ignore());
 
-            CreateMap<TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion, FormQuestion>()
+            CreateMap<Example2.Services.v2.FormEntryResponse.Types.FormQuestion, FormQuestion>()
              .ForMember(dest => dest.AddTimeStamp, options => options.MapFrom(src => src.AddTimeStamp))
               .ForMember(dest => dest.AddUser, options => options.MapFrom(src => src.AddUser))
                 .ForMember(dest => dest.ChangeTimeStamp, options => options.MapFrom(src => src.ChangeTimeStamp))
@@ -56,7 +56,7 @@ namespace TestingWASM.Server.Api.Form.MappingProfiles
             .ForMember(dest => dest.Question, options => options.Ignore())
               .ForMember(dest => dest.QuestionResponse, options => options.Ignore());
 
-            CreateMap<FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType, TestingWASM.Shared.Enums.QuestionResponseType>().ReverseMap();
+            CreateMap<FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType, Example2.Shared.Enums.QuestionResponseType>().ReverseMap();
             CreateMap<FormEntryResponse.Types.ResponseOption, QuestionResponseOption>()
 
                 .ForMember(d => d.QuestionResponse, opt => opt.Ignore()).ReverseMap();
@@ -66,11 +66,11 @@ namespace TestingWASM.Server.Api.Form.MappingProfiles
         {
             public int Convert(string source, int destination, ResolutionContext context)
             {
-                if (System.Enum.IsDefined(typeof(TestingWASM.Shared.Enums.QuestionResponseType), source))
+                if (System.Enum.IsDefined(typeof(Example2.Shared.Enums.QuestionResponseType), source))
                 {
-                    foreach (int i in System.Enum.GetValues(typeof(TestingWASM.Shared.Enums.QuestionResponseType)))
+                    foreach (int i in System.Enum.GetValues(typeof(Example2.Shared.Enums.QuestionResponseType)))
                     {
-                        if (source.ToLower().Equals(((TestingWASM.Shared.Enums.QuestionResponseType)i).ToString().ToLower()))
+                        if (source.ToLower().Equals(((Example2.Shared.Enums.QuestionResponseType)i).ToString().ToLower()))
                             return i;
                     }
                 }
@@ -83,7 +83,7 @@ namespace TestingWASM.Server.Api.Form.MappingProfiles
         {
             public string Convert(int source, string destination, ResolutionContext context)
             {
-                return System.Enum.GetName(typeof(TestingWASM.Shared.Enums.QuestionResponseType), source);
+                return System.Enum.GetName(typeof(Example2.Shared.Enums.QuestionResponseType), source);
             }
         }
 

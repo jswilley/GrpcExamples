@@ -3,18 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingWASM.Server", "TestingWASM\Server\TestingWASM.Server.csproj", "{F95F3357-5208-435D-94E9-14336626F8A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example2.Server", "TestingWASM\Server\Example2.Server.csproj", "{F95F3357-5208-435D-94E9-14336626F8A9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingWASM.Client", "TestingWASM\Client\TestingWASM.Client.csproj", "{6123B24E-5D99-4052-AF49-175ACA3A9081}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example2.Client", "TestingWASM\Client\Example2.Client.csproj", "{6123B24E-5D99-4052-AF49-175ACA3A9081}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingWASM.Shared", "TestingWASM\Shared\TestingWASM.Shared.csproj", "{926F8029-1744-4729-AAE9-3A2E72F8DC9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example2.Shared", "TestingWASM\Shared\Example2.Shared.csproj", "{926F8029-1744-4729-AAE9-3A2E72F8DC9A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8AF57108-1006-4338-AF14-709F89BBCCC5}"
 	ProjectSection(SolutionItems) = preProject
 		ReadMe.txt = ReadMe.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example2Tests", "Example2Tests\Example2Tests.csproj", "{812719C3-7777-4370-BADF-C4FA04A5B510}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example2.Tests", "Example2Tests\Example2.Tests.csproj", "{812719C3-7777-4370-BADF-C4FA04A5B510}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

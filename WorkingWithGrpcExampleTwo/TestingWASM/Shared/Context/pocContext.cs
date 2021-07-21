@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using TestingWASM.Shared.Data.Entities;
+using Example2.Shared.Data.Entities;
 
-namespace TestingWASM.Shared.Context
+namespace Example2.Shared.Context
 {
     public interface IpocContext
     {

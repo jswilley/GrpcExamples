@@ -31,8 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Client\TestingWASM.Client.csproj" />
-    <ProjectReference Include="..\Shared\TestingWASM.Shared.csproj" />
+    <ProjectReference Include="..\Client\Example2.Client.csproj" />
+    <ProjectReference Include="..\Shared\Example2.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

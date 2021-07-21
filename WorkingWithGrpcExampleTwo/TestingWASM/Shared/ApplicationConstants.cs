@@ -1,4 +1,4 @@
-﻿namespace TestingWASM.Shared
+﻿namespace Example2.Shared
 {
     public static class ApplicationConstants
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace TestingWASM.Shared.Data.Entities
+namespace Example2.Shared.Data.Entities
 {
     public partial class User
     {

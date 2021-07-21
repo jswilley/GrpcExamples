@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace TestingWASM.Server.MappingProfiles
+namespace Example2.Server.MappingProfiles
 {
     public static class EnumHelper<T>
     {

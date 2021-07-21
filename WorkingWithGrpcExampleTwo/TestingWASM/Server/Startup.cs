@@ -6,10 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using TestingWASM.Server.Services.V2;
-using TestingWASM.Shared.Context;
+using Example2.Server.Services.V2;
+using Example2.Shared.Context;
 
-namespace TestingWASM.Server
+namespace Example2.Server
 {
     public class Startup
     {
@@ -88,7 +88,7 @@ namespace TestingWASM.Server
             app.UseCors();
             var scope = app.ApplicationServices.CreateScope();
             var context = scope.ServiceProvider.GetService<pocContext>();
-            //  TestingWASM.Shared.Context.Dataload.AddTestData(context);
+            //  Example2.Shared.Context.Dataload.AddTestData(context);
 
             app.UseEndpoints(endpoints =>
             {

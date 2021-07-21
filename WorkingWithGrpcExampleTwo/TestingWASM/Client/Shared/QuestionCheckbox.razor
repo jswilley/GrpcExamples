@@ -1,4 +1,4 @@
-﻿@using TestingWASM.Services
+﻿@using Example2.Services
 
 <div class="col-sm-12">
     <span class="col-form-label" style="padding:0px;" name="@Question.FormQuestionId">@Question.Question</span>
@@ -21,13 +21,13 @@
 
 @code
 {
-    private TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion _Question;
+    private Example2.Services.v2.FormEntryResponse.Types.FormQuestion _Question;
 
     // Create a collection of selected values
     private List<string> _selectedValues;
 
     [Parameter]
-    public TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion Question
+    public Example2.Services.v2.FormEntryResponse.Types.FormQuestion Question
     {
         get
         {
@@ -43,7 +43,7 @@
     }
 
     [Parameter]
-    public EventCallback<TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion> QuestionChanged { get; set; }
+    public EventCallback<Example2.Services.v2.FormEntryResponse.Types.FormQuestion> QuestionChanged { get; set; }
 
     async Task UpdateResponse(string response)
     {

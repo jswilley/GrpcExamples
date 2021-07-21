@@ -4,13 +4,13 @@ using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
-using TestingWASM.Services.v2;
-using TestingWASM.Shared;
-using TestingWASM.Shared.Context;
+using Example2.Services.v2;
+using Example2.Shared;
+using Example2.Shared.Context;
 
-namespace TestingWASM.Server.Services.V2
+namespace Example2.Server.Services.V2
 {
-    public class FormEntryService : TestingWASM.Services.v2.FormEntryService.FormEntryServiceBase
+    public class FormEntryService : Example2.Services.v2.FormEntryService.FormEntryServiceBase
     {
         /// <summary>
         /// Defines the _mapper.
@@ -34,7 +34,7 @@ namespace TestingWASM.Server.Services.V2
             _context = context;
         }
 
-        public override async Task<TestingWASM.Services.v2.FormEntryResponse> GetForm(TestingWASM.Services.v2.FormEntryRequest request, ServerCallContext context)
+        public override async Task<Example2.Services.v2.FormEntryResponse> GetForm(Example2.Services.v2.FormEntryRequest request, ServerCallContext context)
         {
             var id = (int)request.FormTypeId;
             //pull seed data
@@ -46,7 +46,7 @@ namespace TestingWASM.Server.Services.V2
             }
 
             //map seed data to protobuf classes
-            var form = new TestingWASM.Services.v2.FormEntryResponse
+            var form = new Example2.Services.v2.FormEntryResponse
             {
                 Id = id,
                 FormTitle = frm.FormType.Title,
@@ -54,11 +54,11 @@ namespace TestingWASM.Server.Services.V2
             };
             try
             {
-                //TODO get mapping working var mapped = frm.FormQuestionEntries.Select(a => _mapper.Map<TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion>(a));
+                //TODO get mapping working var mapped = frm.FormQuestionEntries.Select(a => _mapper.Map<Example2.Services.v2.FormEntryResponse.Types.FormQuestion>(a));
 
                 foreach (var item in frm.FormQuestionEntries)
                 {
-                    var entry = new TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion()
+                    var entry = new Example2.Services.v2.FormEntryResponse.Types.FormQuestion()
                     {
                         FormQuestionEntryID = ApplicationConstants.NewEntity,
                         FormQuestionId = item.FormQuestionId,
@@ -68,7 +68,7 @@ namespace TestingWASM.Server.Services.V2
                         Required = item.FormQuestion.Required.GetValueOrDefault(),
                         Sequence = item.FormQuestion.Sequence,
                         EndDate = Timestamp.FromDateTime(DateTime.SpecifyKind(item.FormQuestion.EndDate.GetValueOrDefault(), DateTimeKind.Utc)),
-                        //TypeOfResponse = TestingWASM.Shared.Enums.QuestionResponseType,
+                        //TypeOfResponse = Example2.Shared.Enums.QuestionResponseType,
                         DefaultResponse = item.FormQuestion.DefaultResponse,
                         AddTimeStamp = Timestamp.FromDateTime(DateTime.SpecifyKind(item.AddTimeStamp, DateTimeKind.Utc)),
                         AddUser = item.AddUser,
