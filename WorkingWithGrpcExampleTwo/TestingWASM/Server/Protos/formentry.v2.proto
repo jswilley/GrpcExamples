@@ -20,11 +20,19 @@ message FormEntryRequest {
 message FormEntryResponse {
 
     message ResponseOption {
-        string shortDescription = 1;
-        string longDescription = 2;
-        int32 sequence = 3;
-        bool selected = 4;
-    
+        int32 Id = 1;
+        int32 QuestionResponseId =2;
+        string ShortDescription = 3;
+        string LongDescription = 4;
+        int32 SortOrder = 5;
+        bool selected = 6;
+        google.protobuf.Timestamp EffectiveDate = 7;
+        google.protobuf.Timestamp ExpirationDate = 8;
+        string AddUser = 9;
+        google.protobuf.Timestamp AddTimeStamp = 10;
+         string ChangeUser = 11;
+        google.protobuf.Timestamp ChangeTimeStamp = 12;
+
     }
 
     message FormQuestion {
@@ -53,6 +61,7 @@ message FormEntryResponse {
         google.protobuf.Timestamp AddTimeStamp = 14;
          string ChangeUser = 15;
         google.protobuf.Timestamp ChangeTimeStamp = 16;
+        int32 QuestionResponseId = 17;
     }
 
     int32 Id = 1;

@@ -43,6 +43,6 @@ namespace TestingWASM.Shared.Data.Entities
         [InverseProperty("QuestionResponseOptions")]
         public virtual QuestionResponse QuestionResponse { get; set; }
 
-        public virtual ICollection<QuestionResponseOptionFollowUpQuestionMap> FollowUpQuestionMaps { get; set; }
+       
     }
 }

@@ -28,9 +28,12 @@ namespace TestingWASM.Server.Api.Form.MappingProfiles
             .ForMember(dest => dest.ResponseValue, options => options.Ignore())
             .ForMember(dest => dest.TypeOfResponse, options => options.Ignore())
             .ForMember(dest => dest.TypeOfResponseText, options => options.MapFrom(src => src.QuestionResponse.TypeOfResponse))
+            .ForPath(s => s.TypeOfResponseText, opt => opt.MapFrom(src => src.QuestionResponse.TypeOfResponse))
             .ForMember(dest => dest.Question, options => options.MapFrom(src => src.Question.Text))
+            .ForPath(s => s.Question, opt => opt.MapFrom(src => src.Question.Text))
+            .ForMember(s => s.QuestionResponseId, opt => opt.MapFrom(src => src.QuestionResponseId))
             .ForMember(dest => dest.FormQuestionEntryID, options => options.MapFrom(src => src.Id))
-            .ForMember(dest => dest.ResponseOptions, options => options.MapFrom(src => src.QuestionResponse.QuestionResponseOptions));
+            .ForMember(dest => dest.ResponseOptions, options => options.Ignore());
 
             CreateMap<TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion, FormQuestion>()
              .ForMember(dest => dest.AddTimeStamp, options => options.MapFrom(src => src.AddTimeStamp))
@@ -38,21 +41,25 @@ namespace TestingWASM.Server.Api.Form.MappingProfiles
                 .ForMember(dest => dest.ChangeTimeStamp, options => options.MapFrom(src => src.ChangeTimeStamp))
               .ForMember(dest => dest.ChangeUser, options => options.MapFrom(src => src.ChangeUser))
             .ForMember(dest => dest.QuestionId, options => options.MapFrom(src => src.FormQuestionId))
+            .ForMember(dest => dest.FormTypeId, options => options.Ignore())
+            .ForMember(dest => dest.FormType, options => options.Ignore())
+            .ForMember(dest => dest.QuestionResponseId, options => options.MapFrom(src => src.QuestionResponseId))
+            .ForMember(dest => dest.FormQuestionEntries, options => options.Ignore())
             .ForMember(dest => dest.FormSection, options => options.MapFrom(src => src.FormSection))
             .ForMember(dest => dest.DefaultResponse, options => options.MapFrom(src => src.DefaultResponse))
             .ForMember(dest => dest.EndDate, options => options.MapFrom(src => src.EndDate))
             .ForMember(dest => dest.Required, options => options.MapFrom(src => src.Required))
             .ForMember(dest => dest.Sequence, options => options.MapFrom(src => src.Sequence))
-       //     .ForMember(dest => dest.QuestionResponse.QuestionResponseOptions, options => options.MapFrom(src => src.ResponseOptions))
-         //   .ForMember(dest => dest.Question.Text, options => options.MapFrom(src => src.Question))
+           
             .ForMember(dest => dest.Id, options => options.MapFrom(src => src.FormQuestionEntryID))
-        //    .ForMember(dest => dest.QuestionResponse.TypeOfResponse, options => options.MapFrom(src => src.TypeOfResponseText))
+       
             .ForMember(dest => dest.Question, options => options.Ignore())
-              .ForMember(dest => dest.QuestionResponse, options => options.Ignore())
-             .ForMember(dest => dest.QuestionResponseOptionFollowUpQuestionMaps, options => options.Ignore());
+              .ForMember(dest => dest.QuestionResponse, options => options.Ignore());
 
             CreateMap<FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType, TestingWASM.Shared.Enums.QuestionResponseType>().ReverseMap();
-            CreateMap<FormEntryResponse.Types.ResponseOption, QuestionResponseOption>().ReverseMap();
+            CreateMap<FormEntryResponse.Types.ResponseOption, QuestionResponseOption>()
+
+                .ForMember(d => d.QuestionResponse, opt => opt.Ignore()).ReverseMap();
         }
 
         public class StringToEnumConverter : ITypeConverter<String, int>

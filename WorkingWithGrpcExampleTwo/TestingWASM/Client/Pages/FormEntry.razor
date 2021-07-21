@@ -2,10 +2,9 @@
 
 @using TestingWASM.Shared.Data.Entities
 @using TestingWASM.Services.v2
-@using TestingWASM.ViewModels 
+@using TestingWASM.ViewModels
 @using System.Linq
 @using System.Collections.Generic
- 
 
 @inject IFormClientService service
 
@@ -13,8 +12,8 @@
 {
     <div>
         @*<PageHeader IconClass="fas fa-clipboard-list">
-            <Title><span class="fw-300">@Form.FormEntry.FormTitle</span></Title>
-        </PageHeader>*@
+                <Title><span class="fw-300">@Form.FormEntry.FormTitle</span></Title>
+            </PageHeader>*@
 
         <CascadingValue Name="IsFormEntryReadOnly" Value=@IsFormEntryReadOnly>
             @switch (FormType)
@@ -30,23 +29,21 @@
                             <div><span class="fw-300">@FormTitle</span></div>
                         </div>
                         <div class="panel-content">
-                           
-                                    <div class="assessmentSection">
-                                        @foreach (var question in FormQuestions.OrderBy(x => x.Sequence))
-                                        {
-                                            var local = question;
-                                            <FormEntryQuestion Question="local"></FormEntryQuestion>
-                                        }
-                                    </div>
-                              
 
+                            <div class="assessmentSection">
+                                @foreach (var question in FormQuestions.OrderBy(x => x.Sequence))
+                                {
+                                    var local = question;
+                                    <FormEntryQuestion Question="local"></FormEntryQuestion>
+                                }
+                            </div>
                         </div>
-                        </div>
-                        break;
-                        default:
-                        break;
-                        }
-                </CascadingValue>
+                    </div>
+                    break;
+                default:
+                    break;
+            }
+        </CascadingValue>
     </div>
 
 }
@@ -95,20 +92,16 @@
     private bool IsFormEntryReadOnly { get; set; } = false;
     private string FormTitle { get; set; }
 
-
-
     protected override async Task OnInitializedAsync()
     {
         if (!DataLoaded)
         {
-           
 
             var assessmentTask = await service.GetForm(1);
 
-
             // Form.FormEntry.FormDate = string.IsNullOrEmpty(assessmentTask.FormDate.ToString()) ? null : assessmentTask.FormDate.ToDateTime();
             FormTitle = assessmentTask.FormTitle;
-           
+
             FormQuestions = assessmentTask.Questions.ToList();
 
             DataLoaded = true;

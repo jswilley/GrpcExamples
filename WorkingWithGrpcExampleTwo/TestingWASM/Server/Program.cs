@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Net;
-using System.Security.Authentication;
 
 namespace TestingWASM.Server
 {

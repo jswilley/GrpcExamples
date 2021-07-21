@@ -6,7 +6,7 @@
 
 <div class="col-sm-12">
     <div class="row">
-        @foreach (var response in Question.ResponseOptions.OrderBy(x => x.Sequence))
+        @foreach (var response in Question.ResponseOptions.OrderBy(x => x.SortOrder))
         {
             var responseElementIdentifier = $"q{Question.FormQuestionId}-{response.ShortDescription}";
             <div class="col-sm-6 col-md-4">
@@ -16,7 +16,6 @@
                 </div>
             </div>
         }
-
     </div>
 </div>
 
@@ -39,7 +38,7 @@
             _Question = value;
 
             // parse and initialize collection of selected values
-             _selectedValues = _Question.FormSection == null ? new List<string>() : _Question.FormSection.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
+            _selectedValues = _Question.FormSection == null ? new List<string>() : _Question.FormSection.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
         }
     }
 
@@ -55,7 +54,7 @@
             _selectedValues.Add(response);
 
         // flatten selected values for persistence
-          Question.ResponseValue = string.Join(',', _selectedValues);
+        Question.ResponseValue = string.Join(',', _selectedValues);
 
         await QuestionChanged.InvokeAsync(Question);
     }

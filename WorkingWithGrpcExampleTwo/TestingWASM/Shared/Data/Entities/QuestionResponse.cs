@@ -14,7 +14,7 @@ namespace TestingWASM.Shared.Data.Entities
     {
         public QuestionResponse()
         {
-            FollowUpQuestions = new HashSet<FollowUpQuestion>();
+          
             FormQuestions = new HashSet<FormQuestion>();
             QuestionResponseOptions = new HashSet<QuestionResponseOption>();
         }
@@ -37,8 +37,7 @@ namespace TestingWASM.Shared.Data.Entities
         public string ChangeUser { get; set; }
 
 
-        public virtual ICollection<FollowUpQuestion> FollowUpQuestions { get; set; }
-
+     
         public virtual ICollection<FormQuestion> FormQuestions { get; set; }
 
         [InverseProperty(nameof(QuestionResponseOption.QuestionResponse))]

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TestingWASM.Shared
+﻿namespace TestingWASM.Shared
 {
     public static class ApplicationConstants
     {

@@ -8,7 +8,7 @@ namespace TestingWASM.Shared.DTOs
     [DataContract]
     public class FormQuestionDTO
     {
-        
+
         private string responseValue;
         [DataMember(Order = 1)]
         public int FormQuestionId { get; set; }
@@ -30,7 +30,7 @@ namespace TestingWASM.Shared.DTOs
         [DataMember(Order = 8)]
         public string ResponseValue
         {
-            get => responseValue; 
+            get => responseValue;
             set
             {
                 responseValue = value;

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,7 +9,7 @@ namespace TestingWASM.Shared.Data.Entities
     {
         public FormQuestionEntry()
         {
-            FormFollowupQuestionEntries = new HashSet<FormFollowupQuestionEntry>();
+
         }
 
         [Key]
@@ -38,7 +37,6 @@ namespace TestingWASM.Shared.Data.Entities
         [ForeignKey(nameof(FormQuestionId))]
         [InverseProperty("FormQuestionEntries")]
         public virtual FormQuestion FormQuestion { get; set; }
-        [InverseProperty(nameof(FormFollowupQuestionEntry.FormQuestionEntry))]
-        public virtual ICollection<FormFollowupQuestionEntry> FormFollowupQuestionEntries { get; set; }
+
     }
 }

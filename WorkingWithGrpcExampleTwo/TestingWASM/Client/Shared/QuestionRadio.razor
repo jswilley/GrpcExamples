@@ -3,7 +3,7 @@
 </div>
 
 <div class="col-sm-6 col-md-3 row">
-    @foreach (var response in Question.ResponseOptions.OrderBy(x => x.Sequence))
+    @foreach (var response in Question.ResponseOptions.OrderBy(x => x.SortOrder))
     {
         var responseElementIdentifier = $"q{Question.FormQuestionEntryID}-{response.ShortDescription}";
         <div class="col-sm-6 assessmentResponse custom-control custom-radio">
@@ -11,7 +11,6 @@
             <label for="@responseElementIdentifier" class="custom-control-label">@response.LongDescription</label>
         </div>
     }
-    
 </div>
 
 @code

@@ -34,7 +34,7 @@
             SelectionTextType = 1,
             SelectionOtherType = 2,
             FieldBasicType = 3,
-   
+
             BooleanType = 20,
             FieldRequiredType = 21,
             FieldCalendarType = 22,
@@ -42,7 +42,7 @@
             FieldEmailType = 26,
             FieldHiddenType = 27,
             FieldPasswordType = 28,
-       
+
             ExtendedFreeTextBoxType = 31,
             FieldAddressType = 55,
             FieldSliderType = 56

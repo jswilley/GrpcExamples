@@ -16,7 +16,7 @@ namespace TestingWASM.Shared.Data.Entities
         public FormQuestion()
         {
             FormQuestionEntries = new HashSet<FormQuestionEntry>();
-            QuestionResponseOptionFollowUpQuestionMaps = new HashSet<QuestionResponseOptionFollowUpQuestionMap>();
+            
         }
 
         [Key]
@@ -59,7 +59,6 @@ namespace TestingWASM.Shared.Data.Entities
         public virtual QuestionResponse QuestionResponse { get; set; }
         [InverseProperty(nameof(FormQuestionEntry.FormQuestion))]
         public virtual ICollection<FormQuestionEntry> FormQuestionEntries { get; set; }
-        [InverseProperty(nameof(QuestionResponseOptionFollowUpQuestionMap.FormQuestion))]
-        public virtual ICollection<QuestionResponseOptionFollowUpQuestionMap> QuestionResponseOptionFollowUpQuestionMaps { get; set; }
+       
     }
 }

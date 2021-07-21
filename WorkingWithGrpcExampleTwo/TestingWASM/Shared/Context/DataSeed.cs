@@ -34,7 +34,7 @@ namespace TestingWASM.Shared.Context
                 AddUser = "seed",
                 ChangeTimeStamp = System.DateTime.Parse("2021-02-21T10:07:23"),
                 ChangeUser = "seed",
-              
+
             };
         }
 
@@ -43,7 +43,7 @@ namespace TestingWASM.Shared.Context
             var que = GenQuestionList();
             var resp1 = GenListQuestionResponse().First(a => a.TypeOfResponse == "Select");
 
-            var result =  new FormQuestion()
+            var result = new FormQuestion()
             {
                 Id = 0,
 
@@ -86,9 +86,9 @@ namespace TestingWASM.Shared.Context
                 FormTypeId = 1,
                 FormType = GenerateFormType(),
                 Question = GenQuestionList().Skip(1).First(),
-                 QuestionResponse = GenListQuestionResponse().First(a => a.TypeOfResponse == "Text"),
-                 QuestionResponseId = 0
-                 
+                QuestionResponse = GenListQuestionResponse().First(a => a.TypeOfResponse == "Text"),
+                QuestionResponseId = 0
+
             };
         }
 
@@ -139,7 +139,7 @@ namespace TestingWASM.Shared.Context
                 FormType = GenerateFormType(),
                 Question = GenQuestionList().Skip(3).First(),
                 QuestionId = 0,
-               
+
                 QuestionResponse = GenListQuestionResponse().First(a => a.TypeOfResponse == "Number"),
                 QuestionResponseId = 0
             };
@@ -157,7 +157,7 @@ namespace TestingWASM.Shared.Context
                 AddUser = "seed",
                 ChangeTimeStamp = System.DateTime.Parse("2021-02-21T10:07:23"),
                 ChangeUser = "seed",
-                QuestionResponseOptions = resp.Where( a => a.Id == 1 || a.Id == 2).ToList()
+                QuestionResponseOptions = resp.Where(a => a.Id == 1 || a.Id == 2).ToList()
             });
             result.Add(new QuestionResponse()
             {
@@ -191,7 +191,7 @@ namespace TestingWASM.Shared.Context
                 ChangeUser = "seed",
                 QuestionResponseOptions = GenQuestionResponseOption().Where(a => a.Id > 2).ToList()
 
-                
+
             });
 
             result.Add(new QuestionResponse()
@@ -255,7 +255,7 @@ namespace TestingWASM.Shared.Context
                 ChangeUser = "seed",
             });
 
-          
+
 
             result.Add(new QuestionResponseOption()
             {
@@ -386,7 +386,7 @@ namespace TestingWASM.Shared.Context
                 FormId = 0,
                 Id = 0,
                 ResponseValue = string.Empty,
-               FormQuestion = GenFormQuestion1(),
+                FormQuestion = GenFormQuestion1(),
                 FormQuestionId = 1
             });
 

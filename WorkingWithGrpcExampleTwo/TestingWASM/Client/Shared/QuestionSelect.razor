@@ -3,14 +3,13 @@
 </div>
 
 <div class="col-sm-6 col-md-3 row">
-    <select class="form-control" Value="@Question.ResponseValue" >
+    <select class="form-control" Value="@Question.ResponseValue">
         <option value=""></option>
-        @foreach (var response in Question.ResponseOptions.OrderBy(x => x.Sequence))
+        @foreach (var response in Question.ResponseOptions.OrderBy(x => x.SortOrder))
         {
             <option value="@response.ShortDescription" selected="@(Question.ResponseValue == response.ShortDescription ? "selected" : null)"> @response.LongDescription </option>
         }
     </select>
-    
 </div>
 
 @code

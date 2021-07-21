@@ -2,13 +2,9 @@ using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using TestingWASM.Services.v2;
 using static TestingWASM.Services.v2.FormEntryService;
@@ -34,12 +30,7 @@ namespace TestingWASM.Client
                 return new FormEntryServiceClient(channel);
             });
 
-
-
             builder.Services.AddScoped<IFormClientService, FormClientService>();
-            
-
-
 
             await builder.Build().RunAsync();
         }

@@ -18,14 +18,14 @@ namespace TestingWASM.Shared.Data.Entities
         }
 
         #region Generated Properties
-		[Key]
+        [Key]
         [Column("ID")]
 
         public int Id { get; set; }
 
         public int FormTypeId { get; set; }
 
-       [Column(TypeName = "datetime")]
+        [Column(TypeName = "datetime")]
         public DateTime AddTimeStamp { get; set; }
         [Required]
         [StringLength(50)]
@@ -36,15 +36,15 @@ namespace TestingWASM.Shared.Data.Entities
         [StringLength(50)]
         public string ChangeUser { get; set; }
 
-        
+
         #endregion Generated Properties
 
         #region Generated Relationships
 
-         [InverseProperty(nameof(FormQuestionEntry.Form))]
+        [InverseProperty(nameof(FormQuestionEntry.Form))]
         public virtual ICollection<FormQuestionEntry> FormQuestionEntries { get; set; }
-        
-		[ForeignKey(nameof(FormTypeId))]
+
+        [ForeignKey(nameof(FormTypeId))]
         [InverseProperty("FormEntries")]
         public virtual FormType FormType { get; set; }
         #endregion Generated Relationships

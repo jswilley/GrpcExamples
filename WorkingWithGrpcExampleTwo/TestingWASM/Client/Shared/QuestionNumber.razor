@@ -4,12 +4,11 @@
 
 <div class="col-sm-12" id="Comment_@Question.FormQuestionId.ToString()">
     <input type="number" name="@Question.FormQuestionId" @bind="ResponseValue" class="w-100 form-control" />
-    
 </div>
 
 @code
-{ 
-    
+{
+
     public int ResponseValue
     {
         get
@@ -21,8 +20,8 @@
         }
         set
         {
-           
-                Question.ResponseValue = value.ToString();
+
+            Question.ResponseValue = value.ToString();
             QuestionChanged.InvokeAsync(Question);
         }
     }
@@ -37,6 +36,6 @@
     {
         Question.ResponseValue = response;
         await QuestionChanged.InvokeAsync(Question);
-    } 
-    
+    }
+
 }

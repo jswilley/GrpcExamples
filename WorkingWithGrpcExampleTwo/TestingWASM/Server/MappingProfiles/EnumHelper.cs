@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace TestingWASM.Server.MappingProfiles
 {
@@ -44,7 +42,6 @@ namespace TestingWASM.Server.MappingProfiles
                 result = ParseDisplayValues(value, true);
             }
 
-
             return result;
         }
 
@@ -64,5 +61,4 @@ namespace TestingWASM.Server.MappingProfiles
             throw new ArgumentException(value);
         }
     }
-  
 }

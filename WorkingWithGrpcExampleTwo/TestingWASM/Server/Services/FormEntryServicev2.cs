@@ -1,26 +1,22 @@
 ﻿using AutoMapper;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
-using TestingWASM.Shared.Context;
-using TestingWASM.Server.Api.Form.Servicesv2;
 using TestingWASM.Services.v2;
 using TestingWASM.Shared;
-using Google.Protobuf.WellKnownTypes;
+using TestingWASM.Shared.Context;
 
 namespace TestingWASM.Server.Services.V2
 {
-    public class FormEntryService: TestingWASM.Services.v2.FormEntryService.FormEntryServiceBase
+    public class FormEntryService : TestingWASM.Services.v2.FormEntryService.FormEntryServiceBase
     {
         /// <summary>
         /// Defines the _mapper.
         /// </summary>
         private readonly IMapper _mapper;
+
         private readonly ILogger<FormEntryService> logger;
         private readonly pocContext _context;
 
@@ -33,6 +29,7 @@ namespace TestingWASM.Server.Services.V2
         public FormEntryService(pocContext context, IMapper mapper, ILogger<FormEntryService> logger)
         {
             _mapper = mapper;
+            _mapper.ConfigurationProvider.AssertConfigurationIsValid();
             this.logger = logger;
             _context = context;
         }
@@ -57,8 +54,8 @@ namespace TestingWASM.Server.Services.V2
             };
             try
             {
+                //TODO get mapping working var mapped = frm.FormQuestionEntries.Select(a => _mapper.Map<TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion>(a));
 
-                // var mapped = frm.FormQuestionEntries.Select(a => _mapper.Map<TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion>(a));
                 foreach (var item in frm.FormQuestionEntries)
                 {
                     var entry = new TestingWASM.Services.v2.FormEntryResponse.Types.FormQuestion()
@@ -79,66 +76,58 @@ namespace TestingWASM.Server.Services.V2
                         ChangeUser = item.ChangeUser,
                         ResponseValue = item.ResponseValue,
                         TypeOfResponseText = item.FormQuestion.QuestionResponse.TypeOfResponse
-                };
+                    };
 
                     if (item.FormQuestion.QuestionResponse.QuestionResponseOptions != null)
-                    foreach (var opt in item.FormQuestion.QuestionResponse.QuestionResponseOptions)
-                    {
-                        var optGrpc = new FormEntryResponse.Types.ResponseOption()
+                        foreach (var opt in item.FormQuestion.QuestionResponse.QuestionResponseOptions)
                         {
-                            LongDescription = opt.LongDescription,
-                            ShortDescription = opt.ShortDescription,
-                            Sequence = opt.SortOrder
-                        };
-                        entry.ResponseOptions.Add(optGrpc);
-                    }
-                    
+                            var optGrpc = new FormEntryResponse.Types.ResponseOption()
+                            {
+                                LongDescription = opt.LongDescription,
+                                ShortDescription = opt.ShortDescription,
+                                SortOrder = opt.SortOrder
+                            };
+                            entry.ResponseOptions.Add(optGrpc);
+                        }
+
                     switch (item.FormQuestion.QuestionResponse.TypeOfResponse)
                     {
                         case "Select":
                             entry.TypeOfResponse = FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType.Select;
                             break;
+
                         case "Radio":
                             entry.TypeOfResponse = FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType.Radio;
                             break;
+
                         case "Number":
                             entry.TypeOfResponse = FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType.Number;
                             break;
+
                         case "Text":
                             entry.TypeOfResponse = FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType.Text;
                             break;
+
                         case "Date":
                             entry.TypeOfResponse = FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType.Date;
                             break;
+
                         default:
                             entry.TypeOfResponse = FormEntryResponse.Types.FormQuestion.Types.QuestionResponseType.Checkbox;
                             break;
                     }
-                    
-
 
                     form.Questions.Add(entry);
-
                 }
-
-                
-
 
                 return form;
             }
-
             catch (Exception)
             {
                 throw;
             }
 
             return await base.GetForm(request, context);
-
-
         }
-       
-
-
-
-        }
+    }
 }

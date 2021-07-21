@@ -6,8 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using TestingWASM.Shared.Context;
 using TestingWASM.Server.Services.V2;
+using TestingWASM.Shared.Context;
 
 namespace TestingWASM.Server
 {
@@ -34,7 +34,6 @@ namespace TestingWASM.Server
         {
             services.AddGrpc();
             services.AddGrpcReflection();
-
 
             services.AddCors(o => o.AddPolicy("AllowAll", builder =>
             {
@@ -79,8 +78,6 @@ namespace TestingWASM.Server
                 app.UseHsts();
             }
 
-
-
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
@@ -91,11 +88,10 @@ namespace TestingWASM.Server
             app.UseCors();
             var scope = app.ApplicationServices.CreateScope();
             var context = scope.ServiceProvider.GetService<pocContext>();
-          //  TestingWASM.Shared.Context.Dataload.AddTestData(context);
+            //  TestingWASM.Shared.Context.Dataload.AddTestData(context);
 
             app.UseEndpoints(endpoints =>
             {
-
                 endpoints.MapGrpcService<FormEntryService>().EnableGrpcWeb().RequireCors("AllowAll").AllowAnonymous();
 
                 if (env.IsDevelopment())

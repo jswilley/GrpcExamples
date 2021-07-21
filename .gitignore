@@ -27,3 +27,5 @@
 /WorkingWithGrpcExampleTwo/TestWASM.Console/obj
 /WorkingWithGrpcExampleTwo/TestWASMGrpc/.vs/TestWASMGrpc/DesignTimeBuild
 /WorkingWithGrpcExampleTwo/TestWASMGrpc/.vs/TestWASMGrpc/v16/.suo
+/WorkingWithGrpcExampleTwo/Example2Tests/bin/Debug/net5.0
+/WorkingWithGrpcExampleTwo/Example2Tests/obj

@@ -6,21 +6,20 @@ namespace TestingWASM.Api.Common.Settings
     {
         [Required]
         public AzureAdConfigurations AzureAd { get; set; }
+
         [Required]
         public EndpointSettingsConfigurations EndpointSettings { get; set; }
+
         public RoleConfiguration Roles { get; set; }
         public HttpClientPolicyConfiguration HttpClientPolicies { get; set; }
     }
-  
 
     public class EndpointSettingsConfigurations
     {
         public string ApiBaseUrl { get; set; }
 
         public string FormEntryUrl { get; set; }
-
     }
-
 
     public class RoleConfiguration
     {
@@ -29,7 +28,6 @@ namespace TestingWASM.Api.Common.Settings
 
     //public class DefaultValuesConfiguration
     //{
-
     //}
 
     public class AzureAdConfigurations
@@ -48,5 +46,4 @@ namespace TestingWASM.Api.Common.Settings
         public int MaxAttemptBeforeBreak { get; set; }
         public int HandlerTimeoutInMinutes { get; set; }
     }
-
 }
