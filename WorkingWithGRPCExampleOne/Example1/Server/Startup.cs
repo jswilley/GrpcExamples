@@ -6,9 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
-using TestWASM2.Shared;
+using Example1.Shared;
 
-namespace TestWASM2.Server
+namespace Example1.Server
 {
     public class Startup
     {

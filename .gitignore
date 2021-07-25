@@ -29,3 +29,10 @@
 /WorkingWithGrpcExampleTwo/TestWASMGrpc/.vs/TestWASMGrpc/v16/.suo
 /WorkingWithGrpcExampleTwo/Example2Tests/bin/Debug/net5.0
 /WorkingWithGrpcExampleTwo/Example2Tests/obj
+/WorkingWithGRPCExampleOne/Example1/Client/bin/Debug/net5.0
+/WorkingWithGRPCExampleOne/Example1/Client/obj
+/WorkingWithGRPCExampleOne/Example1/Server/bin/Debug/net5.0
+/WorkingWithGRPCExampleOne/Example1/Server/obj
+/WorkingWithGRPCExampleOne/Example1/Shared/bin/Debug/net5.0
+/WorkingWithGRPCExampleOne/Example1/Shared/obj
+/WorkingWithGrpcExampleTwo/.vs/Example2

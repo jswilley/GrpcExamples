@@ -1,6 +1,6 @@
 ﻿syntax = "proto3"; 
 // replace namespace with your own
-option csharp_namespace = "TestWASM2.Shared"; 
+option csharp_namespace = "Example1.Shared"; 
 package WeatherForecast; 
 import "google/protobuf/timestamp.proto"; 
 

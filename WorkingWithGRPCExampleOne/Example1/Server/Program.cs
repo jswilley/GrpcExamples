@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TestWASM2.Server
+namespace Example1.Server
 {
     public class Program
     {

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWASM2.Server", "TestWASM2\Server\TestWASM2.Server.csproj", "{08A21826-7E9A-4EE5-8A0B-BA258EE9F4B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example1.Server", "Example1\Server\Example1.Server.csproj", "{08A21826-7E9A-4EE5-8A0B-BA258EE9F4B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWASM2.Client", "TestWASM2\Client\TestWASM2.Client.csproj", "{FADB52CB-E9B4-4CA5-B831-18441BE2301A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example1.Client", "Example1\Client\Example1.Client.csproj", "{FADB52CB-E9B4-4CA5-B831-18441BE2301A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWASM2.Shared", "TestWASM2\Shared\TestWASM2.Shared.csproj", "{9D9A292F-7C32-4E06-AEE9-176C4DC2FAAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example1.Shared", "Example1\Shared\Example1.Shared.csproj", "{9D9A292F-7C32-4E06-AEE9-176C4DC2FAAE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FE7EB189-66AC-415A-926F-FD732DFEFB50}"
 	ProjectSection(SolutionItems) = preProject

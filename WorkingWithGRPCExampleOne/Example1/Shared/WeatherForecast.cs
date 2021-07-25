@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TestWASM2.Shared
+namespace Example1.Shared
 {
     //public partail class WeatherForecast
     //{

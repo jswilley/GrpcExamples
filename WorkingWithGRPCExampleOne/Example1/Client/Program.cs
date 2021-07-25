@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using Microsoft.AspNetCore.Components;
-using TestWASM2.Shared;
+using Example1.Shared;
 
-namespace TestWASM2.Client
+namespace Example1.Client
 {
     public class Program
     {

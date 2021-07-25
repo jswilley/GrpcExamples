@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TestWASM2.Shared;
+using Example1.Shared;
 
-namespace TestWASM2.Server.Controllers
+namespace Example1.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]

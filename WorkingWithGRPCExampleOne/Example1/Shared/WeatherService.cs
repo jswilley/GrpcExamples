@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using Google.Protobuf.WellKnownTypes;
 
-namespace TestWASM2.Shared
+namespace Example1.Shared
 {
 
 

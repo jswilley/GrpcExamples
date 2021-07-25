@@ -29,7 +29,7 @@ namespace Example2.Server.Services.V2
         public FormEntryService(pocContext context, IMapper mapper, ILogger<FormEntryService> logger)
         {
             _mapper = mapper;
-            _mapper.ConfigurationProvider.AssertConfigurationIsValid();
+          //  _mapper.ConfigurationProvider.AssertConfigurationIsValid();
             this.logger = logger;
             _context = context;
         }

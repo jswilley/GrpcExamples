@@ -31,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Client\Example2.Client.csproj" />
     <ProjectReference Include="..\Shared\Example2.Shared.csproj" />
   </ItemGroup>
 
