@@ -36,3 +36,5 @@
 /WorkingWithGRPCExampleOne/Example1/Shared/bin/Debug/net5.0
 /WorkingWithGRPCExampleOne/Example1/Shared/obj
 /WorkingWithGrpcExampleTwo/.vs/Example2
+/WorkingWithGRPCExampleOne/Example1/SecureTokenService/bin/Debug/net5.0
+/WorkingWithGRPCExampleOne/Example1/SecureTokenService/obj

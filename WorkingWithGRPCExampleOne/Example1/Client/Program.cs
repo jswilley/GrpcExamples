@@ -11,6 +11,8 @@ using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using Microsoft.AspNetCore.Components;
 using Example1.Shared;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Example1.Security;
 
 namespace Example1.Client
 {
@@ -22,9 +24,28 @@ namespace Example1.Client
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddHttpClient("api")
+            .AddHttpMessageHandler(sp =>
+            {
+                var handler = sp.GetService<AuthorizationMessageHandler>()
+                    .ConfigureHandler(
+                        authorizedUrls: new[] { "https://localhost:44371" },
+                        scopes: new[] { "example1" });
+
+                return handler;
+            });
+
+            builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>().CreateClient("api"));
+
+            builder.Services
+                .AddOidcAuthentication(options =>
+                {
+                    builder.Configuration.Bind("oidc", options.ProviderOptions);
+                    options.UserOptions.RoleClaim = "role";
+                })
+                .AddAccountClaimsPrincipalFactory<ArrayClaimsPrincipalFactory<RemoteUserAccount>>();
 
 
-            
 
             builder.Services.AddSingleton(services =>
             {
