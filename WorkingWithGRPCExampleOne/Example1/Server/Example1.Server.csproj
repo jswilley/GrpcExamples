@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Certs\server2.pfx" />
+    <None Remove="server2.pfx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.38.0" />
     <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.38.0" />
     <PackageReference Include="Grpc.AspNetCore.Web" Version="2.38.0" />
@@ -19,12 +24,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Client\Example1.Client.csproj" />
     <ProjectReference Include="..\Shared\Example1.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Certs\" />
+    <Content Include="Certs\server2.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="server2.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 

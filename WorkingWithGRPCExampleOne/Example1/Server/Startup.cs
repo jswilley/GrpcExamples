@@ -16,7 +16,7 @@ namespace Example1.Server
     public class Startup
     {
 
-        private string stsServer = "https://localhost:44352";
+        private string stsServer = "https://localhost:5000";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,7 +29,10 @@ namespace Example1.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
-
+            //services.add.AddOidcAuthentication(options =>
+            //{
+            //    Configuration.Bind("oidc", options.ProviderOptions);
+            //});
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("protectedScope", policy =>
@@ -44,9 +47,10 @@ namespace Example1.Server
                 .AddIdentityServerAuthentication(options =>
                 {
                     options.Authority = stsServer;
-                    options.ApiName = "ProtectedGrpc";
+                    options.ApiName = "example1";
                     options.ApiSecret = "grpc_protected_secret";
                     options.RequireHttpsMetadata = false;
+                    
                 });
 
             services.AddGrpc(options =>

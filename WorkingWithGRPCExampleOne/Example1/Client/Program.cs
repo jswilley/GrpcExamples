@@ -12,7 +12,7 @@ using Grpc.Net.Client.Web;
 using Microsoft.AspNetCore.Components;
 using Example1.Shared;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-using Example1.Security;
+
 
 namespace Example1.Client
 {
@@ -37,13 +37,13 @@ namespace Example1.Client
 
             builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>().CreateClient("api"));
 
-            builder.Services
-                .AddOidcAuthentication(options =>
-                {
-                    builder.Configuration.Bind("oidc", options.ProviderOptions);
-                    options.UserOptions.RoleClaim = "role";
-                })
-                .AddAccountClaimsPrincipalFactory<ArrayClaimsPrincipalFactory<RemoteUserAccount>>();
+            //builder.Services
+            //    .AddOidcAuthentication(options =>
+            //    {
+            //        builder.Configuration.Bind("oidc", options.ProviderOptions);
+            //        options.UserOptions.RoleClaim = "role";
+            //    })
+            //    .AddAccountClaimsPrincipalFactory<ArrayClaimsPrincipalFactory<RemoteUserAccount>>();
 
 
 

@@ -38,3 +38,7 @@
 /WorkingWithGrpcExampleTwo/.vs/Example2
 /WorkingWithGRPCExampleOne/Example1/SecureTokenService/bin/Debug/net5.0
 /WorkingWithGRPCExampleOne/Example1/SecureTokenService/obj
+/WorkingWithGRPCExampleOne/Ex1GrpcService/obj
+/WorkingWithGRPCExampleOne/ExOneClient/obj
+/WorkingWithGRPCExampleOne/Ex1GrpcService/bin/Debug/net5.0
+/WorkingWithGRPCExampleOne/ExOneClient/bin/Debug/net5.0

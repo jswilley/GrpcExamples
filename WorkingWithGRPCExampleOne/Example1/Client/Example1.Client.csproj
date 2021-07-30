@@ -6,6 +6,24 @@
 
   <ItemGroup>
     <Compile Remove="Services\ApiService.cs" />
+    <Compile Remove="Services\ArrayClaimsPrincipalFactory.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Authentication.razor" />
+    <Content Remove="Pages\Claims.razor" />
+    <Content Remove="Shared\LoginDisplay.razor" />
+    <Content Remove="Shared\RedirectToLogin.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Certs\server2.pfx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Certs\server2.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +37,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shared\Example1.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

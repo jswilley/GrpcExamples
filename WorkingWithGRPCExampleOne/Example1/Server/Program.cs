@@ -26,7 +26,9 @@ namespace Example1.Server
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    var cert = new X509Certificate2(Path.Combine("Certs/server2.pfx"), "1111");
+                    var path = Environment.CurrentDirectory;
+
+                    var cert = new X509Certificate2("Certs\\server2.pfx", "");
                     webBuilder.UseStartup<Startup>()
                       .ConfigureKestrel(options =>
                       {
