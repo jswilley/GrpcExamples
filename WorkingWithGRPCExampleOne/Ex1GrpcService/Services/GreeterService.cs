@@ -1,3 +1,4 @@
+using Ex1Shared;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using System;

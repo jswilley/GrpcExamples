@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="greet.proto" />
+    <None Remove="weather.proto" />
+  </ItemGroup>
+
+
+<ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.17.3" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.38.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="5.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization.Policy" Version="2.2.0" />
+  </ItemGroup>
+
+
+<ItemGroup>
+  <Protobuf Include="greet.proto" />
+  <Protobuf Include="weather.proto" />
+</ItemGroup>
+
+</Project>

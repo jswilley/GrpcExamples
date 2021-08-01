@@ -42,3 +42,9 @@
 /WorkingWithGRPCExampleOne/ExOneClient/obj
 /WorkingWithGRPCExampleOne/Ex1GrpcService/bin/Debug/net5.0
 /WorkingWithGRPCExampleOne/ExOneClient/bin/Debug/net5.0
+/WorkingWithGRPCExampleOne/Ex1Shared/bin/Debug/net5.0
+/WorkingWithGRPCExampleOne/Ex1Shared/obj/Debug/net5.0
+/WorkingWithGRPCExampleOne/Ex1Shared/obj
+/WorkingWithGRPCExampleOne/IdentityProvider/bin/Debug
+/WorkingWithGRPCExampleOne/IdentityProvider/obj
+/WorkingWithGRPCExampleOne/_Ex1GrpcServer.txt
