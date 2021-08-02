@@ -17,9 +17,26 @@ namespace IdentityProvider
             new ApiResource[]
             {
                 // the api requires the role claim
-                new ApiResource("example1", "The Weather API", new[] { JwtClaimTypes.Role })
+                new ApiResource("example1", "The Weather API", new[] { JwtClaimTypes.Role }),
+                  new ApiResource("ProtectedGrpc")
+                {
+                    DisplayName = "API protected",
+                    ApiSecrets =
+                    {
+                        new Secret("grpc_protected_secret".Sha256())
+                    },
+                    Scopes = new List<string>{"grpc_protected_scope" },
+                    UserClaims = { "role", "admin", "user", "safe_zone_api" }
+                }
             };
 
+        public static IEnumerable<ApiScope> Scopes =>
+        new ApiScope[]
+        {
+           
+                new ApiScope("grpc_protected_scope", "grpc_protected_scope")
+            };
+        
 
         public static IEnumerable<Client> Clients =>
            

@@ -40,11 +40,21 @@ namespace IdentityProvider
                              options.Events.RaiseInformationEvents = true;
                              options.Events.RaiseSuccessEvents = true;
                          }
-               )
-           
-            .AddDeveloperSigningCredential()
+               ).AddDeveloperSigningCredential()
             .AddInMemoryApiResources(Config.Apis)
+            .AddInMemoryApiScopes(Config.Scopes)
              .AddInMemoryClients(Config.Clients);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy-public",
+                    builder => builder.AllowAnyOrigin()   //WithOrigins and define a specific origin to be allowed (e.g. https://mydomain.com)
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                //.AllowCredentials()
+                .Build());
+            });
+
+            
             
 
         }
@@ -58,7 +68,7 @@ namespace IdentityProvider
             }
 
             app.UseStaticFiles();
-
+            app.UseCors("CorsPolicy-public");  //apply to every request
             app.UseRouting();
             app.UseIdentityServer();
             app.UseAuthorization();

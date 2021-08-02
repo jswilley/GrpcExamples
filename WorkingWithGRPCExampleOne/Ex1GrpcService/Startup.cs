@@ -30,8 +30,7 @@ namespace Ex1GrpcService
             });
             
             services.AddHttpContextAccessor();
-            services.AddAuthentication();
-            services.AddAuthorization();
+           
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy-public",
@@ -41,16 +40,21 @@ namespace Ex1GrpcService
                 //.AllowCredentials()
                 .Build());
             });
-            //services.AddAuthorizationPolicyEvaluator();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("protectedScope", policy =>
+                { policy.RequireClaim("scope", "grpc_protected_scope"); });
+            });
 
-            //services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-            //    .AddIdentityServerAuthentication(options =>
-            //    {
-            //        options.Authority = stsServer;
-            //        options.ApiName = "example1";
-            //        options.ApiSecret = "grpc_protected_secret";
-            //        options.RequireHttpsMetadata = false;
-            //    });
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = stsServer;
+                    options.ApiName = "grpc_protected_scope";
+                    options.ApiSecret = "grpc_protected_secret";
+                    options.RequireHttpsMetadata = false;
+                   
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,8 +75,8 @@ namespace Ex1GrpcService
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<GreeterService>();
-                endpoints.MapGrpcService<WeatherService>().EnableGrpcWeb(); //.RequireAuthorization("protectedScope");
+                endpoints.MapGrpcService<GreeterService>().RequireAuthorization("protectedScope");
+                endpoints.MapGrpcService<WeatherService>().EnableGrpcWeb().RequireAuthorization("protectedScope");
 
                 endpoints.MapGet("/", async context =>
                 {

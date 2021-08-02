@@ -11,7 +11,9 @@ using Ex1Shared;
 namespace Ex1GrpcService
 {
 
-   // [Authorize(Policy = "protectedScope")]
+    [Authorize]
+    [AllowAnonymous]
+
     public class WeatherService : WeatherForecasts.WeatherForecastsBase
     {
         private static readonly string[] Summaries = new[]

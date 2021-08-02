@@ -1,6 +1,6 @@
 ﻿@page "/fetchdata"
 @using Ex1Shared
-@inject WeatherForecasts.WeatherForecastsClient WeatherForecastsClient
+@inject GrpcApiService WeatherForecastsClient
 
 <h1>Weather forecast</h1>
 
@@ -38,7 +38,7 @@ else
     private IList<WeatherForecast> forecasts;
     protected override async Task OnInitializedAsync()
     {
-        var result = await WeatherForecastsClient.GetWeatherAsync(new WeatherForecast());
-        forecasts = result.Forecasts;
+        var result = await WeatherForecastsClient.GetGrpcWeatherDataAsync();
+        forecasts = result;
     }
 }
