@@ -1,6 +1,6 @@
 #  Grpc Examples
 
-This is my attempt to understand [grpc](https://grpc.io/) and how I might use in .net projects with an orientation towards [Blazor](https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-5.0) and Apis.  I have created three examples.  
+This is my attempt to understand [grpc](https://grpc.io/) and how I might use in .net projects with an orientation towards [Blazor](https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-5.0) and Apis.  I have created two examples.  
 
 
 ## Example 1
